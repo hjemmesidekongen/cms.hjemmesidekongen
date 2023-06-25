@@ -170,7 +170,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/typo3/phar-stream-wrapper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webflo/drupal-finder" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/webonyx/graphql-php" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

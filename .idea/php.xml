@@ -150,7 +150,6 @@
       <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
       <path value="$PROJECT_DIR$/vendor/grasmash/expander" />
       <path value="$PROJECT_DIR$/vendor/mnsami/composer-custom-directory-installer" />
-      <path value="$PROJECT_DIR$/vendor/webonyx/graphql-php" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
