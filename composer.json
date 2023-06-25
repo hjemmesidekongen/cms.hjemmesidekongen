@@ -31,8 +31,9 @@
         "drupal/paragraphs": "^1.15",
         "drupal/pathauto": "^1.11",
         "drupal/simple_sitemap": "^4.x-dev",
+        "drupal/upgrade_status": "^4.0",
         "drupal/webp": "1.x-dev",
-        "drush/drush": "^11.5",
+        "drush/drush": "^11.6",
         "mnsami/composer-custom-directory-installer": "^2.0",
         "novicell/atoms": "^1.0",
         "novicell/transform_api": "^1.2"
@@ -109,5 +110,8 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "require-dev": {
+        "drupal/core-dev": "9.5.9"
     }
 }
