@@ -1,0 +1,23 @@
+uuid: 1c8d062c-6dc2-4f67-872a-d49e47d48484
+langcode: da
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: X14u9xrU2rQoy08q_HSMQ2m5z6TuSswH3Qo_nVLhMgY
+id: block_content.field_cloudinary_image_caption
+field_name: field_cloudinary_image_caption
+entity_type: block_content
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,43 @@
+uuid: 1fc7b35a-b78e-494b-b6f9-a8259f22618f
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_paragraph
+    - node.type.page
+    - paragraphs.paragraphs_type.header_wide_image
+  module:
+    - entity_reference_revisions
+id: node.page.field_header_paragraph
+field_name: field_header_paragraph
+entity_type: node
+bundle: page
+label: 'Header indhold'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      header_wide_image: header_wide_image
+    negate: 0
+    target_bundles_drag_drop:
+      header_wide_image:
+        weight: 6
+        enabled: true
+      narrow_box:
+        weight: 7
+        enabled: false
+      narrow_image:
+        weight: 8
+        enabled: false
+      narrow_testimonial:
+        weight: 9
+        enabled: false
+      narrow_text:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

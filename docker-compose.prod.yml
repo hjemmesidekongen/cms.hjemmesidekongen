@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  akvariehobbyen:
+    container_name: cms.akvarie-hobbyen.dk
+    image: ghcr.io/hjemmesidekongen/cms.affiliate:latest
+    ports:
+      - "1338:1337"
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_HOST: akvariehobbyen_db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: cms_akvariehobbyen_dk
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.akvariehobbyen.entrypoints=websecure"
+      - "traefik.http.routers.akvariehobbyen.rule=Host(`cms.akvarie-hobbyen.dk`)"
+      - "traefik.http.routers.akvariehobbyen.tls.certresolver=production"
+    depends_on:
+      - akvariehobbyen_db
+
+  akvariehobbyen_db:
+    container_name: db.cms.akvarie-hobbyen.dk
+    image: postgres
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: cms_akvariehobbyen_dk
+    ports:
+      - "5433:5432"
+    volumes:
+      - akvariehobbyen:/var/lib/postgresql/data
+
+volumes:
+  postgres:
+  akvariehobbyen:
+
+networks:
+  default:
+    name: traefik_net
+    external: true

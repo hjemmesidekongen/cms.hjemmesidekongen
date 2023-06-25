@@ -1,0 +1,21 @@
+uuid: 13e6ee35-c092-473a-aed8-21150df396cc
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - paragraphs.paragraphs_type.narrow_text
+  module:
+    - text
+id: paragraph.narrow_text.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: narrow_text
+label: Indholdstekst
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

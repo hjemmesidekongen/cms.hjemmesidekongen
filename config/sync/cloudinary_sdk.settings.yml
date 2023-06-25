@@ -1,0 +1,8 @@
+_core:
+  default_config_hash: GyDPZAZaA_gpiyatQkgFEwU3GtxssAVcUxhMKify0mw
+langcode: da
+cloudinary_sdk_cloud_name: hjemmesidekongen
+cloudinary_sdk_upload_prefix: 'https://api.cloudinary.com'
+cloudinary_sdk_cname: ''
+cloudinary_sdk_api_key: '276573559233686'
+cloudinary_sdk_api_secret: Kqw4ACLyNnCZTLeJFEUc3kX-alA

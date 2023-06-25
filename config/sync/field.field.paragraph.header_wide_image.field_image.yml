@@ -1,0 +1,29 @@
+uuid: 19bc7761-b991-42a7-a34b-b8a2d68545d8
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image
+    - media.type.cloudinary_image
+    - paragraphs.paragraphs_type.header_wide_image
+id: paragraph.header_wide_image.field_image
+field_name: field_image
+entity_type: paragraph
+bundle: header_wide_image
+label: Billede
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      cloudinary_image: cloudinary_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

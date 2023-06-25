@@ -1,0 +1,58 @@
+# Danish translation of Kino Content (all releases)
+# Copyright (c) 2022 Novicell
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Kino Content (all releases)\n"
+"POT-Creation-Date: 2022-01-25 11:59+0000\n"
+"PO-Revision-Date: 2022-01-25 13:08+0100\n"
+"Language-Team: Danish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Last-Translator: \n"
+"Language: da\n"
+"X-Generator: Poedit 1.8.11\n"
+
+msgid "This must be a link to IMDB such as %url."
+msgstr "Dette skal være et link til IMDB så som %url."
+
+msgid "Must be an IMDB link."
+msgstr "Skal være et IMDB link."
+
+msgid "Carousel"
+msgstr "Karrusel"
+
+msgid "# Carousel"
+msgstr "# Karrusel"
+
+msgid "Teasers"
+msgstr "Smagsprøver"
+
+msgid "Summaries"
+msgstr "Opsummeringer"
+
+msgid "Top media rated"
+msgstr "Top medieanmeldt"
+
+msgid "Top user rated"
+msgstr "Top brugeranmeldt"
+
+msgid "Top anticipated"
+msgstr "Mest ventet"
+
+msgid "Premiere date"
+msgstr "Premiere dato"
+
+msgid "Anytime"
+msgstr "Når som helst"
+
+msgid "In the future"
+msgstr "I fremtiden"
+
+msgid "In the past"
+msgstr "I fortiden"
+
+msgid "Active in cinemas"
+msgstr "Kører i biograferne"

@@ -1,0 +1,18 @@
+uuid: c680e2b1-26e4-4320-8379-f5a1c5797c71
+langcode: da
+status: true
+dependencies:
+  module:
+    - basic_auth
+    - node
+    - serialization
+id: entity.node
+plugin_id: 'entity:node'
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - basic_auth

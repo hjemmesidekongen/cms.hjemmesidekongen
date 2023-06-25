@@ -1,0 +1,26 @@
+atoms:
+  mail_reminder_subject:
+    type: textfield
+    title: Subject
+    description: The subject for movie reminder mails.
+    category: Mails
+    group: Movie reminder
+    weight: 1
+    options:
+      token_types:
+        - node
+    default:
+      da: "[node:title] har premiere om tre dage."
+
+  mail_reminder_body:
+    type: textarea
+    title: Body
+    description: The body for movie reminder mails.
+    category: Mails
+    group: Movie reminder
+    weight: 2
+    options:
+      token_types:
+        - node
+    default:
+      da: "[node:title] vil gå i biograferne den [node:field_premiere:date:date_only].\nBestil billetter på kino.dk."

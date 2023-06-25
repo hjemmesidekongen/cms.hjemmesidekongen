@@ -1,0 +1,43 @@
+uuid: 6cdd27c8-d3ad-4e25-9c82-96ccc4e4ed3c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_header_paragraph
+    - paragraphs.paragraphs_type.header_wide_image
+    - taxonomy.vocabulary.tags
+  module:
+    - entity_reference_revisions
+id: taxonomy_term.tags.field_header_paragraph
+field_name: field_header_paragraph
+entity_type: taxonomy_term
+bundle: tags
+label: 'Header indhold'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      header_wide_image: header_wide_image
+    negate: 0
+    target_bundles_drag_drop:
+      header_wide_image:
+        weight: 6
+        enabled: true
+      narrow_box:
+        weight: 7
+        enabled: false
+      narrow_image:
+        weight: 8
+        enabled: false
+      narrow_testimonial:
+        weight: 9
+        enabled: false
+      narrow_text:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

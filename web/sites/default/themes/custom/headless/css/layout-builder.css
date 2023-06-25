@@ -1,0 +1,159 @@
+.layout-builder {
+  margin-bottom: 1em;
+}
+
+.layout-builder .block-layout-builder {
+  border-color: grey;
+  border-style: dashed;
+  border-width: 1px;
+  background-color: inherit;
+}
+
+.layout__region-info {
+  display: none;
+}
+
+.layout-builder .layout-builder__add-block,
+.layout-builder .layout-builder__add-section {
+  background: transparent;
+  border-radius: var(--ginBorderDefault);
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  outline: 2px dashed var(--gin-color-primary);
+}
+
+.layout-builder .layout-builder__link--add {
+  color: var(--gin-color-primary);
+  background: none;
+  display: block;
+  width: 100%;
+  padding: 1.5em 0;
+  transition: var(--gin-transition);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.layout-builder .layout-builder__link--add:hover {
+  color: var(--gin-color-button-text);
+  background-color: var(--gin-color-primary-hover);
+  border-color: var(--gin-color-primary-hover) !important;
+}
+.layout-builder .layout-builder__link--add::before {
+  margin-left: -0.25em;
+  padding-right: 0.25em;
+  content: "+";
+  font-weight: 900;
+}
+
+.layout-builder__region {
+  border-radius: var(--ginBorderDefault);
+  outline: 2px dashed var(--gin-color-primary);
+}
+.layout-builder__layout {
+  padding: 1rem;
+  border: 1px solid var(--gin-border-color-layer);
+  box-sizing: border-box;
+  background: var(--gin-bg-layer);
+  display: flex;
+  flex-wrap: wrap;
+}
+.layout-builder .layout-builder__section--header {
+  font-size: 1.125em;
+  font-weight: 600;
+  color: var(--gin-color-primary-active);
+  padding: 1em;
+  margin-top: 0;
+  background: var(--gin-bg-header);
+  border: 0 none;
+  border-radius: var(--ginBorderDefault);
+  display: flex;
+  margin-bottom: 1em;
+  width: 100%;
+  align-items: center;
+}
+.layout-builder .layout-builder__section--header .layout-builder__section-label {
+  flex-grow: 1;
+}
+.layout-builder .layout-builder__section--header .layout-builder__link {
+  height: 32px;
+  min-height: 32px;
+  width: 32px;
+  color: transparent !important;
+  overflow: hidden;
+  padding: 6px;
+  box-sizing: border-box;
+  margin: 0 0 0 5px;
+}
+.layout-builder .layout-builder__section--header .layout-builder__link.button {
+  background-color: transparent;
+}
+.layout-builder .layout-builder__section--header .layout-builder__link.button:hover {
+  background-color: var(--gin-color-primary-hover);
+}
+.layout-builder .layout-builder__section--header .layout-builder__link:before {
+  top: 0;
+  margin: 0;
+  height: 16px;
+  width: 16px;
+  display: block;
+}
+.layout-builder .layout-builder__section--header .layout-builder__link:hover::before {
+  background-color: var(--gin-bg-layer);
+}
+
+.media-library-item__preview-wrapper {
+  width: 200px;
+}
+
+.layout-builder-form {
+  margin-bottom: 1em;
+}
+.layout-builder-form .vertical-tabs {
+  display: none;
+}
+.layout-builder-form .form-actions {
+  display: flex;
+  align-items: flex-start;
+  position: fixed;
+  z-index: 500;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--gin-border-color-layer);
+  background-color: var(--gin-bg-layer);;
+  color: var(--gin-color-primary);
+  justify-content: left;
+  padding: 0 1rem;
+  flex-direction: column;
+  text-align: left;
+  font-family: var(--gin-font);
+  font-size: 1em;
+  line-height: 1em;
+  box-shadow: 0 -6px 16px var(--gin-border-color-layer);
+}
+.gin--vertical-toolbar .layout-builder-form .form-actions {
+  left: var(--gin-toolbar-width-collapsed);
+}
+[data-toolbar-menu=open] .layout-builder-form .form-actions {
+  left: var(--gin-toolbar-width);
+}
+.layout-builder-form .form-actions .form-item--toggle-content-preview {
+  display: none;
+}
+@media (min-width: 48em) {
+  .layout-builder-form .form-actions {
+    flex-direction: row-reverse;
+  }
+}
+
+.ui-dialog:not(.ui-dialog-position-side) {
+  top: 50% !important;
+  height: 80% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+}
+
+.ui-dialog:not(.ui-dialog-position-side) .ui-dialog-content {
+  max-height: calc(100% - 118px) !important;
+  min-height: calc(100% - 118px) !important;
+}

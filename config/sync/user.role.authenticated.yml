@@ -1,0 +1,26 @@
+uuid: d869a3db-bd94-4435-bb3c-ee77b3ec69be
+langcode: da
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - contact
+    - filter
+    - media
+    - search
+    - shortcut
+    - system
+_core:
+  default_config_hash: I44QAB4es39lNzMQWiJLq2dfjX7VRSOzT_5KzAcUq_M
+id: authenticated
+label: 'Godkendt bruger'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access shortcuts'
+  - 'access site-wide contact form'
+  - 'search content'
+  - 'use text format basic_html'
+  - 'view media'

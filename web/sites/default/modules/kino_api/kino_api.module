@@ -1,0 +1,128 @@
+<?php
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Alter the list of projects to be updated by locale's interface translation.
+ *
+ * Locale module attempts to update the translation of those modules returned
+ * by \Drupal\update\UpdateManager::getProjects(). Using this hook, the data
+ * returned by \Drupal\update\UpdateManager::getProjects() can be altered or
+ * extended.
+ *
+ * Modules or distributions that use a dedicated translation server should use
+ * this hook to specify the interface translation server pattern, or to add
+ * additional custom/non-Drupal.org modules to the list of modules known to
+ * locale.
+ * - "interface translation server pattern": URL of the .po translation files
+ *   used to download the files from. The URL contains tokens which will be
+ *   replaced by appropriate values.
+ * The following tokens are available for the server pattern:
+ * - "%core": Core version. Value example: "8.x".
+ * - "%project": Project name. Value examples: "drupal", "media_gallery".
+ * - "%version": Project version release. Value examples: "8.1", "8.x-1.0".
+ * - "%language": Language code. Value examples: "fr", "pt-pt".
+ *
+ * @param array $projects
+ *   Project data as returned by \Drupal\update\UpdateManager::getProjects().
+ *
+ * @see locale_translation_project_list()
+ * @ingroup interface_translation_properties
+ */
+function kino_api_locale_translation_projects_alter(array &$projects) {
+  $module_handler = \Drupal::service('module_handler');
+  $path = $module_handler->getModule('kino_api')->getPath();
+  $projects['kino_api']['info']['interface translation server pattern'] = $path . '/translations/%language.po';
+}
+
+function kino_api_blocks_transform_config_alter(&$blocks) {
+  $blocks = [
+    'header' => [
+      [
+        'plugin' => 'header',
+        'id' => 'header',
+      ],
+    ],
+    'content' => [
+      [
+        'plugin' => 'breadcrumbs',
+        'id' => 'breadcrumbs',
+      ],
+      [
+        'plugin' => 'advertisement',
+        'id' => 'advertisement',
+      ],
+      [
+        'plugin' => 'universe',
+        'id' => 'universe',
+      ],
+    ],
+    'footer' => [
+      [
+        'plugin' => 'footer',
+        'id' => 'footer',
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function kino_api_entity_update(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node' && $entity->bundle() == 'movie') {
+    /** @var \Drupal\kino_api\MovieReminders $reminders */
+    $reminders = \Drupal::service('kino_api.reminders');
+    /** @var Node $node */
+    $node = $entity;
+    $reminders->updateReminders($node);
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function kino_api_entity_delete(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node' && $entity->bundle() == 'movie') {
+    /** @var \Drupal\kino_api\MovieReminders $reminders */
+    $reminders = \Drupal::service('kino_api.reminders');
+    /** @var Node $node */
+    $node = $entity;
+    $reminders->deleteReminders($node);
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function kino_api_cron() {
+  /** @var \Drupal\kino_api\MovieReminders $reminders */
+  $reminders = \Drupal::service('kino_api.reminders');
+  $list = $reminders->getDueReminders();
+  /** @var \Drupal\Core\Queue\QueueFactory $queueFactory */
+  $queueFactory = \Drupal::service('queue');
+  $queue = $queueFactory->get('kino_api_reminders');
+  foreach ($list as $reminder) {
+    $queue->createItem($reminder);
+  }
+}
+
+
+/**
+ * Implements hook_mail().
+ */
+function kino_api_mail($key, &$message, $params) {
+  /** @var Node $movie */
+  $movie = $params['movie'];
+  $message['subject'] = atom_view('mail_reminder_subject')
+    ->setTokenData(['node' => $movie])
+    ->toString();
+  $body = atom_view('mail_reminder_body')
+    ->setTokenData(['node' => $movie])
+    ->toString();
+  foreach (explode("\n", $body) as $line) {
+    $message['body'][] = $line;
+  }
+}

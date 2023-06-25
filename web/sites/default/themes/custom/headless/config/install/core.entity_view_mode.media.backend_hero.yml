@@ -1,0 +1,10 @@
+uuid: e0b0f8f1-35ab-45a6-93b6-30ca93c78ed8
+langcode: da
+status: true
+dependencies:
+  module:
+    - media
+id: media.backend_hero
+label: 'Backend Hero'
+targetEntityType: media
+cache: true

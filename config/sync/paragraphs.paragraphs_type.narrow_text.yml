@@ -1,0 +1,10 @@
+uuid: 615bb261-5736-4390-b7d7-9adb52dd4f36
+langcode: da
+status: true
+dependencies: {  }
+id: narrow_text
+label: Tekst
+icon_uuid: null
+icon_default: null
+description: 'Til brug m. smalle afsnit.'
+behavior_plugins: {  }

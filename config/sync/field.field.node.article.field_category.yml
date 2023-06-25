@@ -1,0 +1,29 @@
+uuid: d748e147-8b2e-49f4-93b1-b3b4b4f9e90e
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.article
+    - taxonomy.vocabulary.categories
+id: node.article.field_category
+field_name: field_category
+entity_type: node
+bundle: article
+label: Kategori
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categories: categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

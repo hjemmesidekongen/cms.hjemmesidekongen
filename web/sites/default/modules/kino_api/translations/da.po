@@ -1,0 +1,118 @@
+# $Id$
+#
+# Danish translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  kino_api.info.yml: n/a
+#  kino_api.routing.yml: n/a
+#  src/Controller/UserController.php: n/a
+#  src/Validator/RegisterValidator.php: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2023-01-19 12:18+0100\n"
+"PO-Revision-Date: 2023-01-19 12:18+0100\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Danish <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kino_api.info.yml:0
+msgid "Kino API"
+msgstr ""
+
+#: kino_api.info.yml:0
+msgid "Module for exposing an API with entities transformed to JSON."
+msgstr ""
+
+#: kino_api.info.yml:0
+msgid "Kino"
+msgstr ""
+
+#: kino_api.routing.yml:0
+msgid "Transforms entity into JSON response."
+msgstr ""
+
+#: kino_api.routing.yml:0
+msgid "JWT Auth Issuer"
+msgstr ""
+
+#: kino_api.routing.yml:0
+msgid "Orders"
+msgstr ""
+
+#: src/Controller/UserController.php:118
+msgid "Edit"
+msgstr "Redigér"
+
+#: src/Controller/UserController.php:127
+msgid "Created a new user account for <a href=\":url\">%name</a>. No email has been sent."
+msgstr "Ny konto oprettet for <a href=\":url\">%name</a>. Ingen e-mail sendt."
+
+#: src/Controller/UserController.php:140
+msgid "Registration successful. You are now logged in."
+msgstr "Registrering lykkedes. Du er nu logget ind."
+
+#: src/Controller/UserController.php:148
+msgid "The new user <a href=\":url\">%name</a> was created without an email address, so no welcome message was sent."
+msgstr ""
+"Den nye bruger <a href=\":url\">%name</a> blev oprettet uden en "
+"e-mail-adresse, så der blev ikke sendt en velkomst-mail."
+
+#: src/Controller/UserController.php:160
+msgid "A welcome message with further instructions has been emailed to the new user <a href=\":url\">%name</a>."
+msgstr ""
+"En besked med yderligere vejledning er blevet sendt til den nye bruger "
+"<a href=\":url\">%name</a>."
+
+#: src/Controller/UserController.php:168
+msgid "A welcome message with further instructions has been sent to your email address."
+msgstr ""
+"En besked med yderligere vejledning er blevet sendt til din "
+"e-mail-adresse."
+
+#: src/Controller/UserController.php:175
+msgid "Unable to send email. Contact the site administrator if the problem persists."
+msgstr ""
+"Kan ikke sende e-mail. Kontakt sitets administrator hvis problemet "
+"fortsætter."
+
+#: src/Controller/UserController.php:185
+msgid "Thank you for applying for an account. Your account is currently pending approval by the site administrator.<br />In the meantime, a welcome message with further instructions has been sent to your email address."
+msgstr ""
+"Tak for din ansøgning om en konto. Din konto afventer godkendelse af "
+"en administrator.<br />I mellemtiden er yderligere instruktioner "
+"blevet sendt til din e-mail-adresse."
+
+#: src/Controller/UserController.php:115
+msgid "New user: %name %email."
+msgstr "Ny bruger: %name %email."
+
+#: src/Validator/RegisterValidator.php:60
+msgid "@name field is required."
+msgstr "Feltet @name er påkrævet."
+
+#: src/Validator/RegisterValidator.php:76
+msgid "E-mail already exists."
+msgstr "E-mail eksisterer allerede."
+
+#: src/Validator/RegisterValidator.php:89
+msgid "Gender is not recognized."
+msgstr "Køn kunne ikke genkendes."
+
+#: src/Validator/RegisterValidator.php:100
+msgid "Phone number should consist of +45 and 10 digits in total."
+msgstr "Telefonnummer skal bestå af +45 og 10 tal i alt."
+
+msgid "User profile has been updated."
+msgstr "Bruger profil er blevet opdateret."
+
+msgid "Your current password is missing or incorrect."
+msgstr "Din nuværende adgangskode mangler eller er forkert."
+
+msgid "New password"
+msgstr "Ny adgangskode"

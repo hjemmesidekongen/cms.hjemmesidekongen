@@ -1,0 +1,22 @@
+uuid: df3014da-8d21-48ad-b4cc-af7b265b5184
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - affilliate
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: affilliate_content
+theme: affilliate
+region: content
+weight: -6
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Primært sideindhold'
+  label_display: '0'
+  provider: system
+visibility: {  }

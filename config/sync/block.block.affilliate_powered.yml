@@ -1,0 +1,22 @@
+uuid: 508baa0e-d036-4734-be73-fc64e04e69e7
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - affilliate
+_core:
+  default_config_hash: eYL19CLDyinGTWYQfBD1DswWzglEotE_kHnHx3AxTXM
+id: affilliate_powered
+theme: affilliate
+region: header
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Drives af Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

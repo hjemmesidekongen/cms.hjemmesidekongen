@@ -1,0 +1,126 @@
+<?php
+
+
+/**
+ * Custom theme settings.
+ */
+function affilliate_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id = NULL) {
+  // Work-around for a core bug affecting admin themes. See issue #943212.
+  if (isset($form_id)) {
+    return;
+  }
+
+
+  /*
+   * //////////////////////////
+   * General settings.
+   * * //////////////////////////
+   */
+  $form['custom_settings'] = [
+    '#type' => 'details',
+    '#open' => TRUE,
+    '#title' => t('Settings'),
+  ];
+
+  // Theme.
+  $form['custom_settings']['theme']['primary_hex_25'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 25'),
+    '#default_value' => theme_get_setting('primary_hex_25'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_50'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 50'),
+    '#default_value' => theme_get_setting('primary_hex_50'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_100'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 100'),
+    '#default_value' => theme_get_setting('primary_hex_100'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_200'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 200'),
+    '#default_value' => theme_get_setting('primary_hex_200'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_300'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 300'),
+    '#default_value' => theme_get_setting('primary_hex_300'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_400'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 400'),
+    '#default_value' => theme_get_setting('primary_hex_400'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_500'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 500'),
+    '#default_value' => theme_get_setting('primary_hex_500'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_600'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 600'),
+    '#default_value' => theme_get_setting('primary_hex_600'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_700'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 700'),
+    '#default_value' => theme_get_setting('primary_hex_700'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_800'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 800'),
+    '#default_value' => theme_get_setting('primary_hex_800'),
+  ];
+  $form['custom_settings']['theme']['primary_hex_900'] = [
+    '#type' => 'textfield',
+    '#title' => t('Primary hex - shade 900'),
+    '#default_value' => theme_get_setting('primary_hex_900'),
+  ];
+
+  // General information.
+  $form['custom_settings']['site_information'] = [
+    '#type' => 'details',
+    '#open' => TRUE,
+    '#title' => t('Site information'),
+  ];
+  $form['custom_settings']['site_information']['logo_text'] = [
+    '#type' => 'textfield',
+    '#title' => t('Logo text'),
+    '#default_value' => theme_get_setting('logo_text'),
+  ];
+  $form['custom_settings']['site_information']['email_address'] = [
+    '#type' => 'textfield',
+    '#title' => t('E-mail address'),
+    '#default_value' => theme_get_setting('email_address'),
+  ];
+  $form['custom_settings']['site_information']['site_name'] = [
+    '#type' => 'textfield',
+    '#title' => t('Site name'),
+    '#default_value' => theme_get_setting('site_name'),
+  ];
+
+
+  // Footer.
+  $form['custom_settings']['footer'] = [
+    '#type' => 'details',
+    '#open' => TRUE,
+    '#title' => t('Footer'),
+  ];
+  $form['custom_settings']['footer']['footer_navigation_first_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('First heading'),
+    '#default_value' => theme_get_setting('footer_navigation_first_heading'),
+  ];
+  $form['custom_settings']['footer']['footer_navigation_second_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Second heading'),
+    '#default_value' => theme_get_setting('footer_navigation_second_heading'),
+  ];
+  $form['custom_settings']['footer']['footer_navigation_third_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Third heading'),
+    '#default_value' => theme_get_setting('footer_navigation_third_heading'),
+  ];
+}

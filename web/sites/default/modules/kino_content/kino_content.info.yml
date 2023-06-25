@@ -1,0 +1,11 @@
+name: Kino Content
+description: Module for functionality for content for Kino.
+type: module
+package: Kino
+core_version_requirement: ^9 || ^10
+
+dependencies:
+  - image_style_generator:image_style_generator
+
+interface translation project: kino_content
+interface translation server pattern: modules/contrib/kino_content/translations/%language.po

@@ -1,0 +1,24 @@
+movie-list:
+  label: Movie list type
+  libraries: kino_content/list-style
+  preview_libraries:
+    - styles/styles.preview
+    - kino_content/list-style-preview
+  preview_style: object
+  styles:
+    list-style--rows: Rows
+    list-style--carousel: Carousel
+    list-style--carousel-rated: "# Carousel"
+    list-style--grid: Grid
+    list-style--grid-plus: Grid+
+
+article-list:
+  label: Article list type
+  libraries: kino_content/list-style
+  preview_libraries:
+    - styles/styles.preview
+    - kino_content/list-style-preview
+  preview_style: object
+  styles:
+    list-style--summaries: Summaries
+    list-style--teasers: Teasers

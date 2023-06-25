@@ -1,0 +1,28 @@
+uuid: aac8e871-0fe7-4414-841f-f2689390f218
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.narrow_text.field_content
+    - field.field.paragraph.narrow_text.field_heading
+    - paragraphs.paragraphs_type.narrow_text
+id: paragraph.narrow_text.default
+targetEntityType: paragraph
+bundle: narrow_text
+mode: default
+content:
+  field_content:
+    type: text_format
+    weight: '1'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+  field_heading:
+    type: value
+    weight: '0'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

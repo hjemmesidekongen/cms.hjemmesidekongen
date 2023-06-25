@@ -1,0 +1,29 @@
+uuid: 037962c2-059f-4a89-acef-f6cfe82479a9
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.page.field_header_paragraph
+    - field.field.node.page.field_meta_tags
+    - node.type.page
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  field_header_paragraph:
+    type: entity_transform
+    weight: '1'
+    region: content
+    label: omit
+    settings:
+      transform_mode: default
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag
+    weight: '0'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,10 @@
+name: hjemmesidekongen api
+description: Module for exposing an API with entities transformed to JSON.
+type: module
+package: hjemmesidekongen
+core_version_requirement: ^9 || ^10
+
+dependencies:
+  - transform_api:transform_api
+#  - entity_overview:entity_overview
+#  - entity_overview:entity_overview_transform

@@ -1,0 +1,16 @@
+uuid: 61512c7f-81bc-4515-9ae2-e8c27bd2a7fd
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: hzgvcRgZHltqWf8hBmttoWh95tCJoPL25lPq9YSIRsY
+id: video
+label: Video
+description: 'En lokal videofil.'
+source: video_file
+queue_thumbnail_downloads: false
+new_revision: true
+source_configuration:
+  source_field: field_media_video_file
+field_map:
+  name: name

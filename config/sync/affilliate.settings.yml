@@ -1,0 +1,26 @@
+features:
+  node_user_picture: 1
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: 1
+logo:
+  use_default: 1
+favicon:
+  use_default: 1
+primary_hex_25: '#234455'
+primary_hex_50: '#234455'
+primary_hex_100: '#234455'
+primary_hex_200: '#234455'
+primary_hex_300: '#234455'
+primary_hex_400: '#234455'
+primary_hex_500: '#234455'
+primary_hex_600: '#234455'
+primary_hex_700: '#234455'
+primary_hex_800: '#234455'
+primary_hex_900: '#234455'
+logo_text: AkvarieHobbyen
+email_address: info@akvarie-hobbyen.dk
+site_name: 'Akvarie hobbyen'
+footer_navigation_first_heading: 'Kolonne 1'
+footer_navigation_second_heading: 'Kolonne 2'
+footer_navigation_third_heading: 'Kolonne 3'

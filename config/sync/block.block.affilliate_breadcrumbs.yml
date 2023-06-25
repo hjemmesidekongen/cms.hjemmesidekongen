@@ -1,0 +1,22 @@
+uuid: 4d4aca42-36af-4856-895d-2e35fd531634
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - affilliate
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: affilliate_breadcrumbs
+theme: affilliate
+region: content
+weight: -7
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Brødkrummer
+  label_display: '0'
+  provider: system
+visibility: {  }

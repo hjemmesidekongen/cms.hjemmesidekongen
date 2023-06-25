@@ -1,0 +1,19 @@
+uuid: ec0a77d7-9e82-4630-9187-a970afa3a04c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description
+    - paragraphs.paragraphs_type.narrow_image
+id: paragraph.narrow_image.field_description
+field_name: field_description
+entity_type: paragraph
+bundle: narrow_image
+label: Beskrivelse
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

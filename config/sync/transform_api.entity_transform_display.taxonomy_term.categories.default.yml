@@ -1,0 +1,29 @@
+uuid: 69165f15-64be-418f-9989-f94139a70e6b
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.categories.field_header_paragraph
+    - field.field.taxonomy_term.categories.field_meta_tags
+    - taxonomy.vocabulary.categories
+id: taxonomy_term.categories.default
+targetEntityType: taxonomy_term
+bundle: categories
+mode: default
+content:
+  field_header_paragraph:
+    type: entity_transform
+    weight: '1'
+    region: content
+    label: omit
+    settings:
+      transform_mode: default
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag
+    weight: '0'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

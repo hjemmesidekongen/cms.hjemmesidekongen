@@ -1,0 +1,34 @@
+uuid: 212d0989-673e-43c0-a1da-bc90dd10a8e9
+langcode: da
+status: true
+dependencies:
+  module:
+    - language
+_core:
+  default_config_hash: vcDd9H0uIlyOQGoVAJuD3ADMnQeRR_X3B-ojyb8Cbnc
+id: language-add
+label: 'Tilføjelse af sprog'
+module: language
+routes:
+  -
+    route_name: language.add
+tips:
+  language-add-overview:
+    id: language-add-overview
+    plugin: text
+    label: 'Tilføjelse af sprog'
+    weight: 1
+    body: '<p>På denne side kan du tilføje de fleste almindelige sprog til dit site.</p><p>Hvis det ønskede sprog ikke er tilgængeligt, kan du tilføje et brugerdefineret sprog.</p>'
+  language-add-choose:
+    id: language-add-choose
+    plugin: text
+    label: 'Vælg sprog'
+    weight: 2
+    selector: '#edit-predefined-langcode'
+    body: '<p>Vælg et sprog på listen, eller vælg "Brugerdefineret sprog..." i slutningen af listen.</p><p>Klik på knappen "Tilføj sprog", når du har valgt et sprog.</p><p>Hvis du tilføjer et brugerdefineret sprog, får du en ekstra form, hvor du kan angive navn, kode og retning af sproget.</p>'
+  language-add-continue:
+    id: language-add-continue
+    plugin: text
+    label: 'Fortsætter på'
+    weight: 3
+    body: '<p>Nu hvor du har overblik over funktionen "Tilføj sprog", kan du fortsætte ved at:<ul><li>Tilføje et sprog</li><li>Tilføjelse af en brugerdefineret sprog</li><li><a href="[site:url]admin/config/regional/language">Vis et konfigureret sprog</a></li></ul></p>'

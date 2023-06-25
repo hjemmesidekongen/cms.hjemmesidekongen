@@ -1,0 +1,22 @@
+uuid: a63efc5e-1614-4f5d-af15-6eab0ae321ae
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.media.cloudinary_image.field_cloudinary_transformation
+    - field.field.media.cloudinary_image.field_media_cloudinary_image
+    - media.type.cloudinary_image
+id: media.cloudinary_image.default
+targetEntityType: media
+bundle: cloudinary_image
+mode: default
+content:
+  field_cloudinary_transformation:
+    type: value
+    weight: '1'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_media_cloudinary_image: true

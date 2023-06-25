@@ -1,0 +1,22 @@
+uuid: fb7a417b-01dc-46bf-b505-a1e68c3a4cc4
+langcode: da
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - affilliate
+_core:
+  default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
+id: affilliate_help
+theme: affilliate
+region: header
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Hjælp
+  label_display: '0'
+  provider: help
+visibility: {  }

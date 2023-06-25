@@ -1,0 +1,18 @@
+uuid: 95e230b5-8a4b-492d-aeb4-c1422f31e7e8
+langcode: da
+status: true
+dependencies:
+  module:
+    - basic_auth
+    - serialization
+    - taxonomy
+id: entity.taxonomy_term
+plugin_id: 'entity:taxonomy_term'
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - basic_auth

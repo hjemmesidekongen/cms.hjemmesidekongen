@@ -1,0 +1,73 @@
+uuid: 1ce9ecf2-2585-4eb7-b5ca-430769642a4a
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.media.cloudinary_image.field_cloudinary_transformation
+    - field.field.media.cloudinary_image.field_media_cloudinary_image
+    - image.style.thumbnail
+    - media.type.cloudinary_image
+  module:
+    - image
+    - path
+_core:
+  default_config_hash: y-P958zBUnIAJJZeAW62S7PoKgsCD06yfop_ADn6Rqg
+id: media.cloudinary_image.default
+targetEntityType: media
+bundle: cloudinary_image
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_media_cloudinary_image:
+    type: image_image
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_cloudinary_transformation: true

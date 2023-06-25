@@ -1,0 +1,21 @@
+uuid: 7db8cb12-8b3e-4fdb-b2cc-17f0b30dee1f
+langcode: da
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+    - taxonomy
+id: taxonomy_term.field_header_paragraph
+field_name: field_header_paragraph
+entity_type: taxonomy_term
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,10 @@
+uuid: 088f014b-d26a-4031-a943-d05fb1716807
+langcode: da
+status: true
+dependencies:
+  module:
+    - media
+id: media.backend_teaser
+label: 'Backend Teaser'
+targetEntityType: media
+cache: true

@@ -1,0 +1,22 @@
+uuid: c000aa2c-fa4c-4214-9a55-bf996fabe8d1
+langcode: da
+status: true
+dependencies:
+  module:
+    - block_content
+    - media
+_core:
+  default_config_hash: UrM_K75mFY4Tj2SOg21A3PpseF6B6vRT9eK0gMa613Y
+id: block_content.field_cloudinary_media
+field_name: field_cloudinary_media
+entity_type: block_content
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

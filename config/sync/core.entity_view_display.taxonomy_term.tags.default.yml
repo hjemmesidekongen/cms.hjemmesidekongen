@@ -1,0 +1,42 @@
+uuid: c313ec0c-7acd-478a-bbb6-9b06214d4d34
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.tags.field_header_paragraph
+    - field.field.taxonomy_term.tags.field_meta_tags
+    - taxonomy.vocabulary.tags
+  module:
+    - entity_reference_revisions
+    - metatag
+    - text
+id: taxonomy_term.tags.default
+targetEntityType: taxonomy_term
+bundle: tags
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_header_paragraph:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true

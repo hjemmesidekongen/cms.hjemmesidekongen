@@ -1,0 +1,18 @@
+uuid: 24746b0a-dd66-47f6-9a31-5862648fb765
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.page
+id: node.page.title
+field_name: title
+entity_type: node
+bundle: page
+label: 'Internt navn'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

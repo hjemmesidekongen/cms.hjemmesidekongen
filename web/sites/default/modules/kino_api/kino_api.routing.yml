@@ -1,0 +1,167 @@
+kino_api.user:
+  path: '/transform/user/register'
+  defaults:
+    _title: 'Transforms entity into JSON response.'
+    _controller: '\Drupal\kino_api\Controller\UserController::register'
+  methods: [POST]
+  options:
+    _auth: ['basic_auth', 'cookie', 'oauth2']
+  requirements:
+    _user_is_logged_in: 'FALSE'
+    _access: 'TRUE'
+    _format: json
+
+kino_api.generate_token:
+  path: '/api/jwt/token'
+  defaults:
+    _title: 'JWT Auth Issuer'
+    _controller: '\Drupal\kino_api\Controller\UserController::tokenResponse'
+  methods: [ GET ]
+  options:
+    _auth: [ 'jwt_auth', 'email_auth', 'cookie' ]
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+# User profile routes
+kino_api.current.user.orders:
+  path: '/user/orders'
+  defaults:
+    _title: 'Orders'
+    _controller: '\Drupal\kino_api\Controller\UserController::currentOrders'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+kino_api.user.orders:
+  path: '/user/{user}/orders'
+  defaults:
+    _title: 'Orders'
+    _controller: '\Drupal\kino_api\Controller\UserController::orders'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+kino_api.user.edit:
+  path: '/api/user/{user}/edit'
+  defaults:
+    _title: 'Edit user'
+    _controller: '\Drupal\kino_api\Controller\UserController::editUser'
+  methods: [ PUT ]
+  options:
+    _auth: [ 'jwt_auth', 'email_auth', 'cookie']
+  requirements:
+    _entity_access: 'user.update'
+    _format: json
+
+kino_api.user.changepw:
+  path: '/api/user/{user}/changepw'
+  defaults:
+    _title: 'Change password'
+    _controller: '\Drupal\kino_api\Controller\UserController::changePassword'
+  methods: [ PUT ]
+  options:
+    _auth: [ 'jwt_auth', 'email_auth', 'cookie']
+  requirements:
+    _entity_access: 'user.update'
+    _format: json
+
+kino_api.search.bar:
+  path: '/api/search/bar'
+  defaults:
+    _title: 'Search bar'
+    _controller: '\Drupal\kino_api\Controller\SearchController::searchBar'
+  methods: [ GET ]
+  options:
+    _auth: [ 'jwt_auth', 'email_auth', 'cookie']
+  requirements:
+    _access: 'TRUE'
+    _format: json
+
+kino_api.feedback.add:
+  path: '/api/feedback/add'
+  defaults:
+    _title: 'Add feedback'
+    _controller: '\Drupal\kino_api\Controller\FeedbackController::addFeedback'
+  methods: [ POST ]
+  options:
+    _auth: [ 'jwt_auth', 'email_auth', 'cookie']
+  requirements:
+    _access: 'TRUE'
+    _format: json
+
+kino_api.feedback.edit:
+  path: '/api/feedback/{feedback}/edit'
+  defaults:
+    _title: 'Edit feedback'
+    _controller: '\Drupal\kino_api\Controller\FeedbackController::editFeedback'
+  methods: [ PUT ]
+  options:
+    _auth: ['basic_auth', 'cookie', 'jwt_auth']
+  requirements:
+    _access: 'TRUE'
+    _format: json
+
+kino_api.feedback.get:
+  path: '/api/feedback/get/{node}/{type}/{page}'
+  defaults:
+    _title: 'Get feedback'
+    _controller: '\Drupal\kino_api\Controller\FeedbackController::getFeedback'
+  methods: [ GET ]
+  options:
+    _auth: ['basic_auth', 'cookie', 'jwt_auth']
+  requirements:
+    _access: 'TRUE'
+    _format: json
+
+kino_api.feedback.delete:
+  path: '/api/feedback/{feedback}/delete'
+  defaults:
+    _title: 'Delete feedback'
+    _controller: '\Drupal\kino_api\Controller\FeedbackController::deleteFeedback'
+  methods: [ DELETE ]
+  options:
+    _auth: ['basic_auth', 'cookie', 'jwt_auth']
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _format: json
+
+kino_api.reminder.add:
+  path: '/api/reminder/add/{node}'
+  defaults:
+    _title: 'Add reminder'
+    _controller: '\Drupal\kino_api\Controller\ReminderController::addReminder'
+  methods: [ POST ]
+  options:
+    _auth: [ 'jwt_auth', 'email_auth', 'cookie']
+  requirements:
+    _access: 'TRUE'
+    _format: json
+
+kino_api.reminder.get:
+  path: '/api/reminder/get/{node}'
+  defaults:
+    _title: 'Get emails'
+    _controller: '\Drupal\kino_api\Controller\ReminderController::getReminders'
+  methods: [ GET ]
+  options:
+    _auth: [ 'jwt_auth', 'email_auth', 'cookie']
+  requirements:
+    _permission: 'access content overview'
+    _format: json
+
+kino_api.showtimes.user:
+  path: '/api/showtimes/user/{token}'
+  defaults:
+    _title: 'Get user information'
+    _controller: '\Drupal\kino_api\Controller\ShowtimesController::user'
+  methods: [ GET ]
+  requirements:
+    _access: 'TRUE'
+    _format: json
+
+kino_api.showtimes.generateToken:
+  path: '/api/showtimes/generateToken/{user}/{cinema}/{movie}'
+  defaults:
+    _title: 'Get user information'
+    _controller: '\Drupal\kino_api\Controller\ShowtimesController::generateToken'
+  methods: [ GET ]
+  requirements:
+    _access: 'TRUE'

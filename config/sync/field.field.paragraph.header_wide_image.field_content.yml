@@ -1,0 +1,21 @@
+uuid: 19af04f9-5b91-4b86-a8f8-a2e9473f4d4b
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - paragraphs.paragraphs_type.header_wide_image
+  module:
+    - text
+id: paragraph.header_wide_image.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: header_wide_image
+label: Indholdstekst
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

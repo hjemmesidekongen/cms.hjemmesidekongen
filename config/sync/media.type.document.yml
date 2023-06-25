@@ -1,0 +1,16 @@
+uuid: 3c564772-2ad5-40ef-ac8c-92f7f4448b3f
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: _D9q3XSnP6ik9we9UuoTvZsQKPuYNp_G9PfwVtWzgnQ
+id: document
+label: Dokument
+description: 'En uploadet fil eller dokument, f.eks. en PDF.'
+source: file
+queue_thumbnail_downloads: false
+new_revision: true
+source_configuration:
+  source_field: field_media_document
+field_map:
+  name: name

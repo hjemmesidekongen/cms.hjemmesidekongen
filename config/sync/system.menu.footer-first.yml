@@ -1,0 +1,8 @@
+uuid: 1c0f3b7d-5e13-434e-a8f0-4fab4196dab3
+langcode: da
+status: true
+dependencies: {  }
+id: footer-first
+label: 'Footer navigation - first'
+description: ''
+locked: false

@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
+langcode: da
+uuid: 56567c06-50bb-488f-8ae8-37eaceb109ed
+name: cms.hjemmesidekongen
+mail: mail@hjemmesidekongen.dk
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node/4
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: da

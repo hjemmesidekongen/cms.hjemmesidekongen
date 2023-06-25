@@ -1,0 +1,31 @@
+uuid: 4c6c3f44-f87b-483f-bd09-910bea319e22
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.narrow_box.field_content
+    - field.field.paragraph.narrow_box.field_heading
+    - paragraphs.paragraphs_type.narrow_box
+  module:
+    - text
+id: paragraph.narrow_box.default
+targetEntityType: paragraph
+bundle: narrow_box
+mode: default
+content:
+  field_content:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_heading:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

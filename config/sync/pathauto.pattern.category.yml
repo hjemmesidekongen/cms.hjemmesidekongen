@@ -1,0 +1,22 @@
+uuid: 838145ea-5439-42a7-8415-7b72b2ae806a
+langcode: da
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: category
+label: Kategori
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:parents:join-path]/[term:name]'
+selection_criteria:
+  7fbef1b5-e8cc-43b2-a3a0-e24eeb41b823:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 7fbef1b5-e8cc-43b2-a3a0-e24eeb41b823
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      categories: categories
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,21 @@
+uuid: d7572876-38dc-4dc0-bc69-45c18476ef9b
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_meta_tags
+    - taxonomy.vocabulary.categories
+  module:
+    - metatag
+id: taxonomy_term.categories.field_meta_tags
+field_name: field_meta_tags
+entity_type: taxonomy_term
+bundle: categories
+label: 'Meta tags'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

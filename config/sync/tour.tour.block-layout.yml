@@ -1,0 +1,48 @@
+uuid: 5b9cf1f7-5984-4c39-9b83-8e23bb7b785d
+langcode: da
+status: true
+dependencies:
+  module:
+    - block
+_core:
+  default_config_hash: ructO0IOsghR3CIbNd-0QfLTDiUo8gIJ7mB_nxSil4o
+id: block-layout
+label: 'Blok-layout side'
+module: block
+routes:
+  -
+    route_name: block.admin_display
+tips:
+  block-layout:
+    id: block-layout
+    plugin: text
+    label: Blok-layout
+    weight: 1
+    body: 'Blokke er bokse med indhold, der vises i et område eller en region på sitet, f.eks. en sidefod eller et sidepanel.'
+  place-block:
+    id: place-block
+    plugin: text
+    label: 'Placér Blokke'
+    weight: 2
+    selector: .button--small
+    body: 'Enhver brugerdefineret eller tredjeparts blok kan føjes til en bestemt region ved at klikke på knappen Placér blok. En ny blok kan også oprettes ved at klikke på Placér blok'
+  block-region:
+    id: block-region
+    plugin: text
+    label: Blokregion
+    weight: 3
+    selector: .block-region-select
+    body: 'Assign or change the region of a block by clicking here. A dropdown list with all the regions will appear. You can place one block in multiple regions.'
+  configure-block:
+    id: configure-block
+    plugin: text
+    label: 'Konfigurér blok'
+    weight: 4
+    selector: .dropbutton-widget
+    body: 'Ved at klikke på "Konfigurér" kan du redigere blokkens indhold, ændre synlighedsindstillingerne og endda ændre placeringen af, hvor den vises i dit theme.'
+  custom-block-library:
+    id: custom-block-library
+    plugin: text
+    label: 'Brugerdefineret blokbibliotek'
+    weight: 5
+    body: 'Skærmen til blokstyring har også en anden fane øverst, som bruges til at tilføje brugerdefinerede blokke. Navnet på fanen er "Brugerdefineret blokbibliotek". Denne fane indeholder i sidste ende et link til tilføjelse af brugerdefinerede blokke.'

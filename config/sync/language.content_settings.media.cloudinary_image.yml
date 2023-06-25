@@ -1,0 +1,11 @@
+uuid: e1d13c1b-c756-41fb-a78f-fc757a0c1bf1
+langcode: da
+status: true
+dependencies:
+  config:
+    - media.type.cloudinary_image
+id: media.cloudinary_image
+target_entity_type_id: media
+target_bundle: cloudinary_image
+default_langcode: site_default
+language_alterable: false

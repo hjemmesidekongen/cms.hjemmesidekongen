@@ -1,0 +1,31 @@
+uuid: 86175dbf-111e-487f-ba7d-8aad844cc972
+langcode: da
+status: true
+dependencies:
+  config:
+    - block_content.type.cloudinary_image
+    - field.storage.block_content.field_cloudinary_media
+    - media.type.cloudinary_image
+_core:
+  default_config_hash: SEv92Qi8axPd8ElIQe8kc0fGtl1PHNPAZqNtIPTPp0c
+id: block_content.cloudinary_image.field_cloudinary_media
+field_name: field_cloudinary_media
+entity_type: block_content
+bundle: cloudinary_image
+label: Billede
+description: 'Choose an asset from the Cloudinary media library.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      cloudinary_image: cloudinary_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

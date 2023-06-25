@@ -1,0 +1,8 @@
+uuid: d290fd2e-7b1d-4ba1-8c73-4bf022a24f84
+langcode: da
+status: true
+dependencies: {  }
+name: Kategorier
+vid: categories
+description: 'Bruges til relaterede sider, strukturering af sider og automatisk generering af URL.'
+weight: 0

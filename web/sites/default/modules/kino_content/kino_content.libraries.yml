@@ -1,0 +1,11 @@
+list-style:
+  version: VERSION
+  css:
+    theme:
+      css/list-style.css: {}
+
+list-style-preview:
+  version: VERSION
+  css:
+    theme:
+      css/preview/list-style-preview.css: {}

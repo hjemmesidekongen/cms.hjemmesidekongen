@@ -1,0 +1,21 @@
+uuid: 765cef95-73ad-4d37-b872-2ee4a7b2941f
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_cloudinary_transformation
+    - media.type.cloudinary_image
+_core:
+  default_config_hash: '-SybY4bJNHSlF5tFBmmFeDdXHfvBytCI4mBld3vJLGA'
+id: media.cloudinary_image.field_cloudinary_transformation
+field_name: field_cloudinary_transformation
+entity_type: media
+bundle: cloudinary_image
+label: 'Cloudinary transformation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

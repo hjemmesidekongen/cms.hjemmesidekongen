@@ -1,0 +1,23 @@
+uuid: 92b0d200-5d34-4c72-b291-b2896c3144fd
+langcode: da
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - affilliate
+_core:
+  default_config_hash: yEBET0cqDbk8dkWzaJw-8CKft0961VBflsISoSR6Lj8
+id: affilliate_search_form_narrow
+theme: affilliate
+region: header
+weight: -4
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Søgeformular (smal)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

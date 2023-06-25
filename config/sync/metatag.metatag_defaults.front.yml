@@ -1,0 +1,11 @@
+uuid: 02430719-06c1-44db-8d57-281c652ce443
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 1noCXlegCr5HFehQRF1ViXy1jhU1jZ_sNN99a8Sj5jo
+id: front
+label: Forside
+tags:
+  canonical_url: '[site:url]'
+  shortlink: '[site:url]'

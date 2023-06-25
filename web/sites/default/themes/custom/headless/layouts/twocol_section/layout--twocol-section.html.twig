@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a two-column layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set columns = {
+  '50-50': { left: 'layout__region--w50', right: 'layout__region--w50' },
+  '33-67': { left: 'layout__region--w33', right: 'layout__region--w67' },
+  '67-33': { left: 'layout__region--w67', right: 'layout__region--w33' }
+} %}
+
+{% set classes = [
+  'layout',
+  'layout--twocol',
+  'section',
+] %}
+
+<section {{ attributes.addClass(classes) }}>
+    {% if header and header is not empty %}
+      <div class="layout-builder__section--header">
+        {{ header }}
+      </div>
+    {% endif %}
+  <div class="layout--regions">
+      <div {{ region_attributes.first.addClass([columns[settings.column_widths].left, 'layout__region', 'layout__region--first']) }}>
+        {{ content.first }}
+      </div>
+      <div {{ region_attributes.second.addClass([columns[settings.column_widths].right, 'layout__region', 'layout__region--second']) }}>
+        {{ content.second }}
+      </div>
+  </div>
+</section>

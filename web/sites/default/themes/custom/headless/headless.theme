@@ -1,0 +1,245 @@
+<?php
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\TranslatableInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\TypedData\Exception\MissingDataException;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function headless_preprocess_block__block_content(&$variables) {
+  _headless_add_block_header($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function headless_preprocess_block__inline_block(&$variables) {
+  _headless_add_block_header($variables);
+}
+
+function _headless_add_block_header(&$variables) {
+  $variables['#attached']['library'][] = 'headless/layout-builder';
+  /** @var \Drupal\block_content\Entity\BlockContent $block */
+  $block = $variables['elements']['content']['#block_content'];
+  /** @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface $bundle_info */
+  $bundle_info = \Drupal::service("entity_type.bundle.info");
+  $info = $bundle_info->getBundleInfo('block_content');
+  $variables['block_title'] = $info[$block->bundle()]['label'];
+
+  $variables['operations'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['block-operations']
+    ]
+  ];
+  if (isset($variables['elements']['#contextual_links']['layout_builder_block']['route_parameters'])) {
+    $route_parameters = $variables['elements']['#contextual_links']['layout_builder_block']['route_parameters'];
+    $attributes = [
+      'class' => ['use-ajax', 'block-operation', 'button', 'action-link'],
+      'data-dialog-type' => "dialog",
+      'data-dialog-renderer' => "off_canvas"
+    ];
+    $variables['operations']['configure'] = [
+      '#type' => 'link',
+      '#title' => t('Configure'),
+      '#url' => Url::fromRoute('layout_builder.update_block', $route_parameters),
+      '#attributes' => $attributes
+    ];
+    $variables['operations']['configure']['#attributes']['class'][] = 'block-operation--configure';
+    $variables['operations']['configure']['#attributes']['class'][] = 'action-link--icon-edit';
+    $variables['operations']['move'] = [
+      '#type' => 'link',
+      '#title' => t('Move'),
+      '#url' => Url::fromRoute('layout_builder.move_block_form', $route_parameters),
+      '#attributes' => $attributes
+    ];
+    $variables['operations']['move']['#attributes']['class'][] = 'block-operation--move';
+    $variables['operations']['move']['#attributes']['class'][] = 'action-link--icon-drag';
+    $variables['operations']['remove'] = [
+      '#type' => 'link',
+      '#title' => t('Remove'),
+      '#url' => Url::fromRoute('layout_builder.remove_block', $route_parameters),
+      '#attributes' => $attributes
+    ];
+    $variables['operations']['remove']['#attributes']['class'][] = 'block-operation--remove';
+    $variables['operations']['remove']['#attributes']['class'][] = 'action-link--icon-trash';
+    $variables['operations']['remove']['#attributes']['class'][] = 'action-link--danger';
+    unset($variables['elements']['#contextual_links']['layout_builder_block']);
+    unset($variables['title_suffix']['contextual_links']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function headless_preprocess_layout(&$variables) {
+  foreach ($variables['header'] ?? [] as $key => $value) {
+    if (is_array($value) && $value['#type'] == 'link') {
+      $variables['header'][$key]['#attributes']['class'][] = 'action-link';
+      if ($key == 'remove') {
+        $variables['header'][$key]['#weight'] = 100;
+        $variables['header'][$key]['#attributes']['class'][] = 'action-link--icon-trash';
+        $variables['header'][$key]['#attributes']['class'][] = 'action-link--danger';
+      } elseif ($key == 'configure') {
+        $variables['header'][$key]['#attributes']['class'][] = 'button';
+        $variables['header'][$key]['#attributes']['class'][] = 'action-link--icon-cog';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function headless_preprocess_node(&$variables) {
+  if ($variables['elements']['#view_mode'] == 'full') {
+    /** @var Node $node */
+    $node = $variables['elements']['#node'];
+    $variables['header'] = [];
+
+    if ($node->hasField('field_header') && !$node->get('field_header')->isEmpty()) {
+      try {
+        $pid = $node->get('field_header')->first();
+        if (!is_null($pid)) {
+          $pid = $pid->getValue()['target_id'];
+          $paragraph = Paragraph::load($pid);
+          if (!is_null($paragraph)) {
+            $variables['header'] = \Drupal::entityTypeManager()
+              ->getViewBuilder('paragraph')
+              ->view($paragraph);
+            $variables['header']['#title'] = $node->label();
+          }
+        }
+      } catch (MissingDataException $e) {
+        \Drupal::logger('premium_headless')->error($e->getMessage());
+      }
+    }
+  }
+}
+
+/**
+ * Change hero paragraph, add page title.
+ *
+ * @param array $variables
+ *   Theme variables.
+ */
+function headless_preprocess_paragraph__basic_hero(array &$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['elements']['#paragraph'];
+
+  if (isset($variables['elements']['#title'])) {
+    $variables['title'] = $variables['elements']['#title'];
+  }
+
+  try {
+    if (!$paragraph->get('field_color_theme')
+        ->isEmpty() && !empty($paragraph->get('field_color_theme')
+        ->first()
+        ->getValue())) {
+      /** @var \Drupal\styles\StylesManager $styles */
+      $styles = Drupal::service('styles.manager');
+      $styles->applyTo($paragraph->get('field_color_theme'), $variables);
+    }
+  } catch (MissingDataException $e) {
+  }
+}
+
+/**
+ * Inline navigation preprocess.
+ *
+ * @param array $variables
+ *   Template variables.
+ */
+function headless_preprocess_block__inline_block__inline_navigation(array &$variables) {
+  /** @var \Drupal\block_content\Entity\BlockContent $block */
+  $block = $variables['elements']['content']['#block_content'];
+
+  $nodes = [];
+  if (Drupal::moduleHandler()->moduleExists('content_hierarchy') && $block->hasField('field_inline_navigation_mode') && $block->get('field_inline_navigation_mode')->value === 'parent' && !empty($block->get('field_inline_navigation_parent')->target_id)) {
+    $parent_id = $block->get('field_inline_navigation_parent')->target_id;
+    $node = Node::load($parent_id);
+    $lang_id = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    if ($node instanceof TranslatableInterface && !empty($node->getTranslationLanguages(FALSE)) && $node->hasTranslation($lang_id)) {
+      $node = $node->getTranslation($lang_id);
+    }
+    if (!empty($node)) {
+      /** @var \Drupal\content_hierarchy\ContentHierarchyStorage $contentHierarchyStorage */
+      $contentHierarchyStorage = \Drupal::service('content_hierarchy.storage');
+      $content = $contentHierarchyStorage->loadFromEntity($node);
+      if (!is_null($content)) {
+        $children = $content->getChildren() ?? [];
+        foreach ($children as $child) {
+          $nodes[] = $child->getEntity();
+        }
+
+        // Set a cache tags, so it is possible to invalidate it,
+        // if a new node sets the selected parent as it´s parent.
+        if (!empty($variables['#cache']['tags'])) {
+          $variables['#cache']['tags'] = Cache::mergeTags($variables['#cache']['tags'], $contentHierarchyStorage->getContentCacheTags([$content]));
+        }
+        else {
+          $variables['#cache']['tags'] = $contentHierarchyStorage->getContentCacheTags([$content]);
+        }
+      }
+    }
+  }
+  else {
+    $node_ids = [];
+    if ($block->hasField('field_inline_navigation_pages')) {
+      foreach ($block->get('field_inline_navigation_pages') as $value) {
+        $node_ids[] = $value->target_id;
+      }
+      $nodes = Node::loadMultiple($node_ids);
+    }
+  }
+
+  unset($variables['content']['field_inline_navigation_pages']);
+  unset($variables['content']['field_inline_navigation_parent']);
+  if (!empty($nodes)) {
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
+    $rendered_nodes = [];
+    /** @var \Drupal\node\Entity\Node $node */
+    foreach ($nodes as $node) {
+      if ($node->access()) {
+        $rendered_nodes[] = $view_builder->view($node, 'teaser');
+      }
+    }
+    $variables['content']['items'] = $rendered_nodes;
+  }
+  else {
+    $variables['content']['items'] = [];
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_item_list().
+ */
+function headless_preprocess_item_list__layouts(&$variables) {
+  $items = [];
+  foreach ($variables['items'] as $key => $item) {
+    $title = $item['value']['#title'];
+    $link = $item['value'];
+    $link['#title'] = '';
+    $link['#attributes']['class'][] = 'admin-item__link';
+    $items[$key]['value'] = [
+      'link' => $link,
+      'title' => ['#type' => 'container', '#attributes' => ['class' => ['admin-item__title']], 'value' => $title]
+    ];
+    $items[$key]['attributes'] = $item['attributes'];
+  }
+  $variables['items'] = $items;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function headless_form_node_page_layout_builder_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['actions']['#attributes']['class'][] = 'dialog-off-canvas-main-canvas';
+  $form['actions']['#attributes']['data-off-canvas-main-canvas'] = '';
+}

@@ -1,0 +1,49 @@
+<?php
+
+use Drupal\feedback\Entity\Feedback;
+
+/**
+ * Implements hook_update_N().
+ */
+function kino_content_update_9001(&$sandbox) {
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function kino_content_update_9002(&$sandbox) {
+  $entitites = \Drupal::entityTypeManager()->getStorage('feedback')->loadMultiple();
+  /** @var \Drupal\feedback\FeedbackInterface $feedback */
+  foreach ($entitites as $feedback) {
+    if ($feedback->bundle() == 'review') {
+      if ($feedback->get('field_body')->isEmpty() || $feedback->get('field_body')
+          ->first()
+          ->getString() == '') {
+        $feedback->set('field_full_review', FALSE);
+      }
+      else {
+        $feedback->set('field_full_review', TRUE);
+      }
+      $feedback->save();
+    }
+  }
+}
+
+/**
+ * Delete all ratings feedback
+ */
+function kino_content_update_9003(&$sandbox) {
+  $entityTypeManager = \Drupal::entityTypeManager();
+  $storage = $entityTypeManager->getStorage('feedback');
+  $ids = $storage->getQuery()
+    ->condition('bundle', 'rating')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (!empty($ids)) {
+    $feedback = feedback::loadMultiple($ids);
+
+    // Delete existing entities.
+    $storage->delete($feedback);
+  }
+}

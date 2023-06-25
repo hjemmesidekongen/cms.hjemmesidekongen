@@ -1,0 +1,49 @@
+uuid: d56a189f-f037-4198-9706-38482e421b24
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_narrow_paragraphs
+    - node.type.article
+    - paragraphs.paragraphs_type.narrow_box
+    - paragraphs.paragraphs_type.narrow_image
+    - paragraphs.paragraphs_type.narrow_testimonial
+    - paragraphs.paragraphs_type.narrow_text
+  module:
+    - entity_reference_revisions
+id: node.article.field_narrow_paragraphs
+field_name: field_narrow_paragraphs
+entity_type: node
+bundle: article
+label: 'Smalt indhold'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      narrow_box: narrow_box
+      narrow_image: narrow_image
+      narrow_testimonial: narrow_testimonial
+      narrow_text: narrow_text
+    negate: 0
+    target_bundles_drag_drop:
+      header_wide_image:
+        weight: 6
+        enabled: false
+      narrow_box:
+        weight: 7
+        enabled: true
+      narrow_image:
+        weight: 8
+        enabled: true
+      narrow_testimonial:
+        weight: 9
+        enabled: true
+      narrow_text:
+        weight: 10
+        enabled: true
+field_type: entity_reference_revisions

@@ -1,0 +1,28 @@
+uuid: 38d2c691-4993-4f67-aa26-344ebc43c7ed
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.narrow_testimonial.field_content
+    - field.field.paragraph.narrow_testimonial.field_name
+    - paragraphs.paragraphs_type.narrow_testimonial
+id: paragraph.narrow_testimonial.default
+targetEntityType: paragraph
+bundle: narrow_testimonial
+mode: default
+content:
+  field_content:
+    type: text_format
+    weight: '0'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+  field_name:
+    type: value
+    weight: '1'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

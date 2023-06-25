@@ -1,0 +1,10 @@
+uuid: 9d62421b-0270-4b16-900f-1b4cd09961d6
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: yoNVreoTdTZTY7GuE8fI9Jmxqdz8vlo4ZJKixMNSosw
+name: Tags
+vid: tags
+description: 'Brug tags til at gruppere artikler om samme emne.'
+weight: 0

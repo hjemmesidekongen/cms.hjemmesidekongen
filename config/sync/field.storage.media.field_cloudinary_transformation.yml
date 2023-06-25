@@ -1,0 +1,21 @@
+uuid: 88ad67e0-0db2-489f-8e79-5ed043883ca0
+langcode: da
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: XEb7sF9pg-Cb29ijgw8C-M733I89A3IMYeMa_GbRKog
+id: media.field_cloudinary_transformation
+field_name: field_cloudinary_transformation
+entity_type: media
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

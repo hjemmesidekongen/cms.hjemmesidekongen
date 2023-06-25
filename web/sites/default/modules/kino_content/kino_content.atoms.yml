@@ -1,0 +1,147 @@
+atoms:
+  footer_bottom_privacy:
+    type: link
+    title: Privacy policy
+    description: The privacy policy link in the bottom of the footer.
+    category: Page layout
+    group: Footer
+    subgroup: Bottom
+    weight: 1
+    options:
+      internal: true
+      external: false
+    default:
+      da:
+        title: Privatlivspolitik
+        url: /
+
+  footer_bottom_cookie:
+    type: link
+    title: Cookie policy
+    description: The cookie policy link in the bottom of the footer.
+    category: Page layout
+    group: Footer
+    subgroup: Bottom
+    weight: 2
+    options:
+      internal: true
+      external: false
+    default:
+      da:
+        title: Cookiepolitik
+        url: /
+
+  footer_bottom_consent:
+    type: link
+    title: Change of consent
+    description: The change of consent link in the bottom of the footer.
+    category: Page layout
+    group: Footer
+    subgroup: Bottom
+    weight: 3
+    options:
+      internal: true
+      external: false
+    default:
+      da:
+        title: Ændring af samtykke
+        url: /
+
+  footer_bottom_sitemap:
+    type: link
+    title: Sitemap
+    description: The sitemap link in the bottom of the footer.
+    category: Page layout
+    group: Footer
+    subgroup: Bottom
+    weight: 4
+    options:
+      internal: true
+      external: false
+    default:
+      da:
+        title: Sitemap
+        url: /
+
+  meta_menu_link_1:
+    type: link
+    title: Link 1
+    description: The first link in the bottom of the burger menu.
+    category: Page layout
+    group: Burger menu
+    subgroup: Bottom
+    weight: 1
+    options:
+      internal: true
+      external: false
+    default:
+      da:
+        title: Kontakt og FAQ
+        url: /
+
+  meta_menu_link_2:
+    type: link
+    title: Link 2
+    description: The second link in the bottom of the burger menu.
+    category: Page layout
+    group: Burger menu
+    subgroup: Bottom
+    weight: 2
+    options:
+      internal: true
+      external: false
+    default:
+      da:
+        title: Om Kino
+        url: /
+
+  profile_need_help:
+    type: link
+    title: Need help?
+    description: The need help link in the bottom of the user profile on mobile.
+    category: Page layout
+    group: User profile
+    weight: 1
+    options:
+      internal: true
+      external: false
+    default:
+      da:
+        title: Brug for hjælp?
+        url: /
+
+  fallback_poster:
+    type: media
+    title: Poster
+    description: The fallback image for poster images.
+    category: Fallback
+    group: Fallback images
+    weight: 1
+    default:
+
+  fallback_thumbnail:
+    type: media
+    title: Thumbnail
+    description: The fallback image for thumbnail images.
+    category: Fallback
+    group: Fallback images
+    weight: 2
+    default:
+
+  fallback_large:
+    type: media
+    title: Large
+    description: The fallback image for large 16:9 images.
+    category: Fallback
+    group: Fallback images
+    weight: 3
+    default:
+
+  fallback_small:
+    type: media
+    title: Small
+    description: The fallback image for small 16:9 images.
+    category: Fallback
+    group: Fallback images
+    weight: 4
+    default:

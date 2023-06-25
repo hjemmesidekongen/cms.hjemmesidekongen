@@ -1,0 +1,10 @@
+uuid: 7feb547b-0e6d-4bf9-92cf-b2d6198e2b4f
+langcode: da
+status: true
+dependencies: {  }
+id: narrow_box
+label: Boks
+icon_uuid: null
+icon_default: null
+description: 'Til brug m. smalle afsnit.'
+behavior_plugins: {  }

@@ -1,0 +1,3 @@
+services:
+  Drupal\kino_content\PersonCreditsCollector:
+    arguments: [ '@entity_type.manager']

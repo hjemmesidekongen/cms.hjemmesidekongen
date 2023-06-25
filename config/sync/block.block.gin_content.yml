@@ -1,0 +1,22 @@
+uuid: 6ea74ec7-7281-4012-a02f-f721676364b9
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - gin
+_core:
+  default_config_hash: hBHXB7hC05XU7pDYzETt-GUcpFlogK1gkjyAsg0Ym58
+id: gin_content
+theme: gin
+region: content
+weight: -2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Primært sideindhold'
+  label_display: '0'
+  provider: system
+visibility: {  }

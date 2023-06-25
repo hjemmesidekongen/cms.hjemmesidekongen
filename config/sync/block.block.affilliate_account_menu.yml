@@ -1,0 +1,27 @@
+uuid: c157ea0d-e2ea-4757-8b89-ea102e0f1b00
+langcode: da
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - affilliate
+_core:
+  default_config_hash: gmxYWWHmgbe0Pnv8y48ZLSLH5mEHejOjAP6RLxUfdzU
+id: affilliate_account_menu
+theme: affilliate
+region: header
+weight: -4
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: Brugerkontomenu
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

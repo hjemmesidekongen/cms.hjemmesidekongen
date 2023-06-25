@@ -1,0 +1,88 @@
+uuid: 2ecccb27-ff30-41a2-8c42-18655576bce3
+langcode: da
+status: true
+dependencies:
+  module:
+    - views_ui
+_core:
+  default_config_hash: XIYL1KF7ND2XQRa5AxvEcp8vgCN2kUGiuBNhCgxrPME
+id: views-ui
+label: Redigeringsside
+module: views_ui
+routes:
+  -
+    route_name: entity.view.edit_form
+  -
+    route_name: entity.view.edit_display_form
+tips:
+  views-main:
+    id: views-main
+    plugin: text
+    label: 'Håndtér indstillinger for views'
+    weight: 1
+    body: 'Vis eller redigér konfigurationen.'
+  views-ui-displays:
+    id: views-ui-displays
+    plugin: text
+    label: 'Vises i dette view'
+    weight: 2
+    selector: '#views-display-top'
+    body: 'Et display er en metode til at vise resultaterne, f.eks. som en side eller en blok. Et view kan indeholde flere displays, som vises her. Det aktive display er fremhævet.'
+  views-ui-view-admin:
+    id: views-ui-view-admin
+    plugin: text
+    label: 'Vis administration'
+    weight: 3
+    position: right
+    selector: '#views-display-extra-actions'
+    body: 'Udfør administrative opgaver, som f.eks. at tilføje en beskrivelse eller oprette en kopi. Klik på dropdown-menuen for at se de tilgængelige muligheder.'
+  views-ui-format:
+    id: views-ui-format
+    plugin: text
+    label: Output-format
+    weight: 4
+    selector: .views-ui-display-tab-bucket.format
+    body: 'Vælg hvordan resultaterne skal vises. Vælg f.eks. <em>Indhold</em> for at vise en komplet version af hvert resultat baseret på dine præsentationsindstillinger. Eller vælg <em>Felter</em> som gør det muligt kun at vise specifikke felter for hvert resultat. Yderligere formater kan tilføjes ved installere moduler som <em>udvider</em> Drupals kernefunktionalitet.'
+  views-ui-fields:
+    id: views-ui-fields
+    plugin: text
+    label: Felter
+    weight: 5
+    selector: .views-ui-display-tab-bucket.field
+    body: 'Hvis denne visning bruger filtre er de opstillet her. Du kan klikke på et felt for at konfigurere det.'
+  views-ui-filter:
+    id: views-ui-filter
+    plugin: text
+    label: 'Filtrer din visning'
+    weight: 6
+    selector: .views-ui-display-tab-bucket.filter
+    body: 'Tilføj filtre for at begrænse mængden af resultater i dit output. Hvis du f.eks. kun ønsker at vise indhold, der er <em>udgivet</em>, kan du tilføje filtret <em>Udgivet</em> og vælge <em>Ja</em>.'
+  views-ui-filter-operations:
+    id: views-ui-filter-operations
+    plugin: text
+    label: 'Filtrer handlinger'
+    weight: 7
+    selector: '.views-ui-display-tab-bucket.filter .dropbutton-widget'
+    body: 'Tilføj, omarranger eller fjern filtre.'
+  views-ui-sorts:
+    id: views-ui-sorts
+    plugin: text
+    label: Kriterie
+    weight: 8
+    selector: .views-ui-display-tab-bucket.sort
+    body: 'Tilpas rækkefølgen af resultaterne. Klik på den aktive sorteingsregel for at konfigurere den.'
+  views-ui-sorts-operations:
+    id: views-ui-sorts-operations
+    plugin: text
+    label: Sorteringshandlinger
+    weight: 9
+    selector: '.views-ui-display-tab-bucket.sort .dropbutton-widget'
+    body: 'Tilføj, omfordel eller fjern sorteringsregler.'
+  views-ui-preview:
+    id: views-ui-preview
+    plugin: text
+    label: Gennemse
+    weight: 10
+    position: right
+    selector: '#preview-submit'
+    body: 'Vis et preview.'

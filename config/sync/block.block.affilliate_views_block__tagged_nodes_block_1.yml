@@ -1,0 +1,33 @@
+uuid: e05e39bf-252d-40f2-8951-3ea4157cb1b6
+langcode: da
+status: true
+dependencies:
+  config:
+    - views.view.tagged_nodes
+  module:
+    - taxonomy
+    - views
+  theme:
+    - affilliate
+id: affilliate_views_block__tagged_nodes_block_1
+theme: affilliate
+region: content
+weight: -5
+provider: null
+plugin: 'views_block:tagged_nodes-block_1'
+settings:
+  id: 'views_block:tagged_nodes-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:taxonomy_term':
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    context_mapping:
+      taxonomy_term: '@taxonomy_term.taxonomy_term_route_context:taxonomy_term'
+    bundles:
+      tags: tags

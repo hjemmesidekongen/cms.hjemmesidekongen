@@ -1,0 +1,10 @@
+uuid: 41dd6ee3-33d5-452b-914e-bfcbae74c3a1
+langcode: da
+status: true
+dependencies: {  }
+id: header_wide_image
+label: 'Bredt billede'
+icon_uuid: null
+icon_default: null
+description: 'Til brug m. header afsnit.'
+behavior_plugins: {  }

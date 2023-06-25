@@ -1,0 +1,21 @@
+uuid: b7fbc9df-e8c3-4352-9448-6483c3cd4ed2
+langcode: da
+status: true
+dependencies:
+  config:
+    - block_content.type.cloudinary_image
+    - field.storage.block_content.field_cloudinary_image_caption
+_core:
+  default_config_hash: NHaS4IgJhanAE3_HltefXWtAlR0b95urfpZikUNwU7Y
+id: block_content.cloudinary_image.field_cloudinary_image_caption
+field_name: field_cloudinary_image_caption
+entity_type: block_content
+bundle: cloudinary_image
+label: Undertekst
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

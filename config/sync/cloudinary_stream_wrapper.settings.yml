@@ -1,0 +1,5 @@
+_core:
+  default_config_hash: pSTNeTl2LOUxaE76USBx2kJKRfcO6YfGClLTFPYy--Q
+langcode: da
+cloudinary_stream_wrapper_logging: 0
+cloudinary_stream_wrapper_folders: {  }

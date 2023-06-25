@@ -1,0 +1,29 @@
+uuid: 39dd3adb-1c04-4411-8767-1893a0a57c53
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.tags.field_header_paragraph
+    - field.field.taxonomy_term.tags.field_meta_tags
+    - taxonomy.vocabulary.tags
+id: taxonomy_term.tags.default
+targetEntityType: taxonomy_term
+bundle: tags
+mode: default
+content:
+  field_header_paragraph:
+    type: entity_transform
+    weight: '1'
+    region: content
+    label: omit
+    settings:
+      transform_mode: default
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag
+    weight: '0'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

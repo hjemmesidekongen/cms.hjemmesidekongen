@@ -1,0 +1,20 @@
+uuid: 2411b0e5-964a-487b-ae49-644cce0dd607
+langcode: da
+status: true
+dependencies:
+  theme:
+    - affilliate
+_core:
+  default_config_hash: Q9_2whdOj1YIomfvsIfopROW4FT_X5pY0DjdOiOaQ5U
+id: affilliate_primary_admin_actions
+theme: affilliate
+region: highlighted
+weight: -5
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primære administratorhandlinger'
+  label_display: '0'
+  provider: core
+visibility: {  }

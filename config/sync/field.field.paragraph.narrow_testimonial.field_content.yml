@@ -1,0 +1,21 @@
+uuid: e3720c59-f2c9-4f63-a4db-3fd6870c6b5c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - paragraphs.paragraphs_type.narrow_testimonial
+  module:
+    - text
+id: paragraph.narrow_testimonial.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: narrow_testimonial
+label: Indholdstekst
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

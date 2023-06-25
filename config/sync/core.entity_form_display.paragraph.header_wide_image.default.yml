@@ -1,0 +1,44 @@
+uuid: ce4781e3-2c90-4320-a80b-5a29ce245f24
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.header_wide_image.field_content
+    - field.field.paragraph.header_wide_image.field_heading
+    - field.field.paragraph.header_wide_image.field_image
+    - paragraphs.paragraphs_type.header_wide_image
+  module:
+    - cloudinary_media_library_widget
+    - text
+id: paragraph.header_wide_image.default
+targetEntityType: paragraph
+bundle: header_wide_image
+mode: default
+content:
+  field_content:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_image:
+    type: cloudinary_media_library_widget
+    weight: 2
+    region: content
+    settings:
+      resource_type: image
+      media_types: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,22 @@
+uuid: eb7385e1-8283-4073-bbeb-bc2bc46dc816
+langcode: da
+status: true
+dependencies:
+  theme:
+    - affilliate
+_core:
+  default_config_hash: nGE3EoPQQaQCuqTUtZgw0-KIzmrqdKDzdNQf2JyPUt4
+id: affilliate_primary_local_tasks
+theme: affilliate
+region: highlighted
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primære faneblade'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

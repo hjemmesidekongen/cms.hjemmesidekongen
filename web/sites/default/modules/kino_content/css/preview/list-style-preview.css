@@ -1,0 +1,41 @@
+.styles--preview.styles--preview--object div.list-style--rows {
+  mask: url(../../assets/images/list.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../../assets/images/list.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.styles--preview.styles--preview--object div.list-style--carousel {
+  mask: url(../../assets/images/slideshow.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../../assets/images/slideshow.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.styles--preview.styles--preview--object div.list-style--carousel-rated {
+  mask: url(../../assets/images/slideshow_no.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../../assets/images/slideshow_no.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.styles--preview.styles--preview--object div.list-style--grid {
+  mask: url(../../assets/images/grid.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../../assets/images/grid.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.styles--preview.styles--preview--object div.list-style--summaries {
+  mask: url(../../assets/images/list.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../../assets/images/list.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.styles--preview.styles--preview--object div.list-style--teasers {
+  mask: url(../../assets/images/grid.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../../assets/images/grid.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}

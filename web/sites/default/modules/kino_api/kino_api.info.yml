@@ -1,0 +1,15 @@
+name: Kino API
+description: Module for exposing an API with entities transformed to JSON.
+type: module
+package: Kino
+core_version_requirement: ^9 || ^10
+
+dependencies:
+  - transform_api:transform_api
+  - styles:styles
+  - entity_overview:entity_overview
+  - entity_overview:entity_overview_transform
+  - feedback:feedback
+
+interface translation project: kino_api
+interface translation server pattern: modules/contrib/kino_api/translations/%language.po

@@ -1,0 +1,8 @@
+uuid: 895c0fa4-d0f3-4398-abd5-832003cc9d6b
+langcode: da
+status: true
+dependencies: {  }
+id: footer-second
+label: 'Footer navigation - second'
+description: ''
+locked: false

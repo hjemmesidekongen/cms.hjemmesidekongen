@@ -1,0 +1,19 @@
+langcode: da
+status: true
+dependencies:
+  theme:
+    - headless
+id: headless_secondary_local_tasks
+theme: headless
+region: pre_content
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Sekundære faneblade'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

@@ -1,0 +1,21 @@
+uuid: f95d37a7-c153-4792-8a45-39ce88af1b1d
+langcode: da
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+      - footer
+    parent: 'main:'
+_core:
+  default_config_hash: AeW1SEDgb1OTQACAWGhzvMknMYAJlcZu0jljfeU3oso
+name: Artikel
+type: article
+description: 'Brug <em>artikler</em> til tidsfølsomt indhold som nyheder, pressemeddelelser eller blogindlæg.'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: true

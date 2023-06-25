@@ -1,0 +1,22 @@
+uuid: 21cd5e00-1cf4-448c-b374-77c5c1996903
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - olivero
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: olivero_breadcrumbs
+theme: olivero
+region: content
+weight: -7
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Brødkrummer
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,10 @@
+uuid: df3fe27d-199e-46d7-83c6-0cacc012deb7
+langcode: da
+status: true
+dependencies:
+  module:
+    - media
+id: media.token
+label: Token
+targetEntityType: media
+cache: true

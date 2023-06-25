@@ -1,0 +1,53 @@
+.block .field--type-styles div {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-color: black;
+}
+
+.gin--dark-mode .block .field--type-styles div {
+  background-color: white;
+}
+
+.block .field--type-styles div.list-style--rows {
+  mask: url(../assets/images/list.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../assets/images/list.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.block .field--type-styles div.list-style--carousel {
+  mask: url(../assets/images/slideshow.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../assets/images/slideshow.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.block .field--type-styles div.list-style--carousel-rated {
+  mask: url(../assets/images/slideshow_no.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../assets/images/slideshow_no.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.block .field--type-styles div.list-style--grid-plus,
+.block .field--type-styles div.list-style--grid {
+  mask: url(../assets/images/grid.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../assets/images/grid.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.block .field--type-styles div.list-style--summaries {
+  mask: url(../assets/images/list.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../assets/images/list.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}
+
+.block .field--type-styles div.list-style--teasers {
+  mask: url(../assets/images/grid.svg) no-repeat 50% 50%;
+  mask-size: contain;
+  -webkit-mask: url(../assets/images/grid.svg) no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+}

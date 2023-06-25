@@ -1,0 +1,48 @@
+uuid: cf86cc70-d3a9-481f-8100-6130f00fc092
+langcode: da
+status: true
+dependencies:
+  module:
+    - language
+_core:
+  default_config_hash: gjYvYwMqulNsq7VmScWKOqEUxar9AX0TvG8vfCCguUQ
+id: language-edit
+label: 'Redigering af sprog'
+module: language
+routes:
+  -
+    route_name: entity.configurable_language.edit_form
+tips:
+  language-edit-overview:
+    id: language-edit-overview
+    plugin: text
+    label: 'Redigering af sprog'
+    weight: 1
+    body: '<p>På denne side kan du redigere sitets sprog, inklusive brugerdefinerede sprog.</p>'
+  language-edit-langcode:
+    id: language-edit-langcode
+    plugin: text
+    label: Sprogkode
+    weight: 2
+    selector: '#edit-langcode-view'
+    body: '<p>Du kan ikke ændre en sprogkode på sitet. Det skyldes at systemet bruger koden til at holde styr på sproget.</p>'
+  language-edit-label:
+    id: language-edit-label
+    plugin: text
+    label: Sprognavn
+    weight: 3
+    selector: '#edit-label'
+    body: '<p>Sprognavnet bruges på hele webstedet for alle brugere og er skrevet på engelsk. Navnene på indbyggede sprog kan oversættes ved hjælp af oversættelse modulet, og navnene på både indbyggede og brugerdefinerede sprog kan oversættes ved hjælp af konfiguration oversættelse modulet.</p>'
+  language-edit-direction:
+    id: language-edit-direction
+    plugin: text
+    label: Sprogretning
+    weight: 4
+    selector: '#edit-direction--wrapper--description'
+    body: '<p>Vælg om det er et  "venstre mod højre" eller "højre mod venstre" sprog.</p><p>Bemærk, at ikke alle temaer støtte "højre mod venstre" layout, så test dit tema, hvis du skal bruge dette.</p>'
+  language-edit-continue:
+    id: language-edit-continue
+    plugin: text
+    label: 'Fortsætter på'
+    weight: 5
+    body: '<p>Nu hvor du har overblik over funktionen "Rediger sprog", kan du fortsætte ved at:<ul><li>Redigering et sprog</li><li><a href="[site:url]admin/config/regional/language">Vis konfigureret sprog</a></li></ul></p>'

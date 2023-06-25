@@ -1,0 +1,65 @@
+name: Headless
+type: theme
+description: 'Headless frontend'
+package: Drupal Premium
+version: 1.0.0
+core_version_requirement: ^9 || ^10
+base theme: gin
+dependencies:
+  - styles
+  - premium_core
+
+libraries:
+  - headless/master
+  - claro/global-styling
+  - gin/gin
+
+libraries-override:
+  # Headless overrides: disable
+  # needed override to overcome dialog styling issues
+  core/drupal.dialog.off_canvas:
+    css:
+      base:
+        misc/dialog/off-canvas/css/reset.css: false
+        misc/dialog/off-canvas/css/base.css: false
+      component:
+        misc/dialog/off-canvas/css/button.css: false
+        misc/dialog/off-canvas/css/drupal.css: false
+        misc/dialog/off-canvas/css/form.css: false
+        misc/dialog/off-canvas/css/table.css: false
+        misc/dialog/off-canvas/css/details.css: false
+        misc/dialog/off-canvas/css/messages.css: false
+        misc/dialog/off-canvas/css/tabledrag.css: false
+        misc/dialog/off-canvas/css/throbber.css: false
+        misc/dialog/off-canvas/css/dropbutton.css: false
+
+  layout_builder/drupal.layout_builder:
+    css:
+      theme:
+        css/layout-builder.css: false
+        css/off-canvas.css: false
+
+libraries-extend:
+  core/drupal.layout_builder:
+    - headless/layout-builder
+
+ckeditor_stylesheets:
+  - dist/css/theme/accent.css
+  - dist/css/theme/variables.css
+  - dist/css/theme/ckeditor.css
+
+ckeditor5-stylesheets: false
+
+# Regions
+regions:
+  header: 'Header'
+  pre_content: 'Pre-content'
+  breadcrumb: Breadcrumb
+  highlighted: Highlighted
+  help: Help
+  content: Content
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  sidebar_first: 'First sidebar'
+regions_hidden:
+  - sidebar_first

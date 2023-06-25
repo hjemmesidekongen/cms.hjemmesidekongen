@@ -1,0 +1,11 @@
+master:
+  version: 1.0.0
+  css:
+    base:
+      css/master.css: {}
+
+layout-builder:
+  version: 1.0.0
+  css:
+    base:
+      css/layout-builder.css: {}

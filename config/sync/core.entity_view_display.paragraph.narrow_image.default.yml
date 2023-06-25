@@ -1,0 +1,30 @@
+uuid: 62efc4f1-1dde-4f5d-9345-b1a6457a2d1e
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.narrow_image.field_description
+    - field.field.paragraph.narrow_image.field_image
+    - paragraphs.paragraphs_type.narrow_image
+id: paragraph.narrow_image.default
+targetEntityType: paragraph
+bundle: narrow_image
+mode: default
+content:
+  field_description:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

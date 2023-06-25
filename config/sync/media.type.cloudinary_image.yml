@@ -1,0 +1,16 @@
+uuid: 821752c8-ea4a-478b-a7ff-227ff12ec3fb
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: V1xN7KqnksIFLO3VtpaDiXT3zeFgsH3LtVpEbaaQqbI
+id: cloudinary_image
+label: 'Cloudinary image'
+description: 'A remotely hosted image on Cloudinary media library.'
+source: image
+queue_thumbnail_downloads: true
+new_revision: false
+source_configuration:
+  source_field: field_media_cloudinary_image
+field_map:
+  name: name

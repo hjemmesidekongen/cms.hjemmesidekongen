@@ -1,0 +1,47 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+
+/**
+ * Implements hook_schema().
+ */
+function kino_api_schema() {
+  $schema['reminder_queue'] = [
+    'description' => 'Relewise indexing queue.',
+    'fields' => [
+      'id' => [
+        'description' => 'ID for reminder.',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'nid' => [
+        'description' => 'ID for the movie.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+      'email' => [
+        'description' => 'E-mail of the recipient',
+        'type' => 'varchar',
+        'length' => 256,
+        'not null' => TRUE,
+      ],
+      'timestamp' => [
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Create new reminder queue table.
+ */
+function kino_api_update_10001(&$sandbox) {
+  $schema = \Drupal::database()->schema();
+  $table_schema = kino_api_schema();
+  $schema->createTable('reminder_queue', $table_schema['reminder_queue']);
+}

@@ -1,0 +1,22 @@
+uuid: 686aeced-27fd-4c72-8f28-480ba4a3f919
+langcode: da
+status: true
+dependencies:
+  theme:
+    - gin
+_core:
+  default_config_hash: BCWhood0xXFQYqxFgL1spXdb9KeIuXH1YvTdjIEedDg
+id: gin_secondary_local_tasks
+theme: gin
+region: content
+weight: -1
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

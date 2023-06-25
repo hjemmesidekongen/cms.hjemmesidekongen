@@ -1,0 +1,20 @@
+uuid: 1c01974b-2b74-400c-906a-968d272801c5
+langcode: da
+status: true
+dependencies:
+  theme:
+    - affilliate
+_core:
+  default_config_hash: 6aOgWsNTXjqrDm98TXSAjP6qd2nCijD1xw45MrnbK-Y
+id: affilliate_page_title
+theme: affilliate
+region: header
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: Sidetitel
+  label_display: '0'
+  provider: core
+visibility: {  }

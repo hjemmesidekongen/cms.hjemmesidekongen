@@ -1,0 +1,19 @@
+uuid: 90786c71-0e55-4971-897f-4550feef44ee
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_name
+    - paragraphs.paragraphs_type.narrow_testimonial
+id: paragraph.narrow_testimonial.field_name
+field_name: field_name
+entity_type: paragraph
+bundle: narrow_testimonial
+label: Afsender
+description: 'Eksempelvis navnet på afsenderen af udtalelsen. Eks. "Morten Nissen - hjemmesidekongen"'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

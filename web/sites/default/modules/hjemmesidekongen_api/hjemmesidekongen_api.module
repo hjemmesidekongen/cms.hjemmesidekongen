@@ -1,0 +1,34 @@
+<?php
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+
+function hjemmesidekongen_api_blocks_transform_config_alter(&$blocks) {
+  $blocks = [
+    'header' => [
+      [
+        'plugin' => 'header',
+        'id' => 'header',
+      ],
+    ],
+    'site_settings' => [
+      [
+        'plugin' => 'site_settings',
+        'id' => 'site_settings',
+      ],
+    ],
+    'content' => [
+      [
+        'plugin' => 'breadcrumbs',
+        'id' => 'breadcrumbs',
+      ],
+    ],
+    'footer' => [
+      [
+        'plugin' => 'footer',
+        'id' => 'footer',
+      ],
+    ],
+  ];
+}

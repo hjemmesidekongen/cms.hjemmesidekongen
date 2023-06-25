@@ -1,0 +1,10 @@
+uuid: 26f3a4fe-27d6-42ef-a01e-7a6d6296fb68
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: qp08Sz_iG6TYV-0qpxz3huPpaR1vCGH8Ca9KticDme4
+id: cloudinary_image
+label: 'Cloudinary image'
+revision: 0
+description: 'Embed an image from Cloudinary media library.'

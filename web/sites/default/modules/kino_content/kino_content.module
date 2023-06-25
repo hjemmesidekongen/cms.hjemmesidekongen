@@ -1,0 +1,647 @@
+<?php
+
+use Drupal\atoms\Transform\AtomTransform;
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\entity_overview\OverviewFilter;
+use Drupal\entityqueue\Entity\EntitySubqueue;
+use Drupal\feedback\Entity\Feedback;
+use Drupal\feedback\FeedbackInterface;
+use Drupal\kino_content\Transform\DisplayNameTransform;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\transform_api\Transform\EntityTransform;
+use Drupal\user\Entity\User;
+
+/**
+ * Alter the list of projects to be updated by locale's interface translation.
+ *
+ * Locale module attempts to update the translation of those modules returned
+ * by \Drupal\update\UpdateManager::getProjects(). Using this hook, the data
+ * returned by \Drupal\update\UpdateManager::getProjects() can be altered or
+ * extended.
+ *
+ * Modules or distributions that use a dedicated translation server should use
+ * this hook to specify the interface translation server pattern, or to add
+ * additional custom/non-Drupal.org modules to the list of modules known to
+ * locale.
+ * - "interface translation server pattern": URL of the .po translation files
+ *   used to download the files from. The URL contains tokens which will be
+ *   replaced by appropriate values.
+ * The following tokens are available for the server pattern:
+ * - "%core": Core version. Value example: "8.x".
+ * - "%project": Project name. Value examples: "drupal", "media_gallery".
+ * - "%version": Project version release. Value examples: "8.1", "8.x-1.0".
+ * - "%language": Language code. Value examples: "fr", "pt-pt".
+ *
+ * @param array $projects
+ *   Project data as returned by \Drupal\update\UpdateManager::getProjects().
+ *
+ * @see locale_translation_project_list()
+ * @ingroup interface_translation_properties
+ */
+function kino_content_locale_translation_projects_alter(array &$projects) {
+  $module_handler = \Drupal::service('module_handler');
+  $path = $module_handler->getModule('kino_content')->getPath();
+  $projects['kino_content']['info']['interface translation server pattern'] = $path . '/translations/%language.po';
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function kino_content_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+
+  // Set cast member paragraphs to 'Instruktion' and 'Medvirkende' on initializing of the adding a movie.
+  if ($form_id === "node_movie_form" && \Drupal::requestStack()->getCurrentRequest()->getMethod() === "GET") {
+    $roleOptions = $form['field_cast_members']['widget']['0']['subform']['field_movie_role']['widget']['#options'];
+    if (!empty($roleOptions)) {
+      $valueInstruction = array_search('Instruktion', $roleOptions);
+      $form['field_cast_members']['widget']['0']['subform']['field_movie_role']['widget']['#default_value'] = $valueInstruction;
+
+      $valueCastMember = array_search('Medvirkende', $roleOptions);
+      $form['field_cast_members']['widget']['1']['subform']['field_movie_role']['widget']['#default_value'] = $valueCastMember;
+    }
+  }
+}
+
+/**
+ * Implements hook_HOOK_transform_alter().
+ */
+function kino_content_block_transform_alter(&$transformation) {
+  if (empty($transformation)) {
+    return;
+  }
+  switch ($transformation['#block_id']) {
+    case 'menu':
+      $transformation['links'] = [
+        'meta_menu_link_1' => new AtomTransform('meta_menu_link_1'),
+        'meta_menu_link_2' => new AtomTransform('meta_menu_link_2'),
+      ];
+      break;
+  }
+}
+
+/**
+ * Implements hook_HOOK_transform_alter().
+ */
+function kino_content_entity_transform_alter(&$transformation) {
+  if (empty($transformation)) {
+    return;
+  }
+  /** @var ContentEntityInterface $entity */
+  $entity = $transformation['#entity'];
+
+  /* Layout block alterations */
+  if ($transformation['entity_type'] === 'block_content') {
+    if ($transformation['bundle'] == 'inline_navigation') {
+      $mode = 'pages';
+      if (Drupal::moduleHandler()
+          ->moduleExists('content_hierarchy') && isset($transformation['field_inline_navigation_mode']) && !empty($transformation['field_inline_navigation_parent'])) {
+        if ($entity->hasField('field_inline_navigation_mode') && !$entity->get('field_inline_navigation_mode')->isEmpty() && !empty($entity->get('field_inline_navigation_mode')->getValue())) {
+          $mode = $entity->get('field_inline_navigation_mode')
+            ->first()
+            ->getValue()['value'];
+        }
+      }
+      if ($mode === 'parent') {
+        $transformation['items'] = $transformation['field_inline_navigation_parent'];
+        unset($transformation['field_inline_navigation_parent']);
+        unset($transformation['field_inline_navigation_pages']);
+      }
+      else {
+        $transformation['items'] = $transformation['field_inline_navigation_pages'];
+        unset($transformation['field_inline_navigation_parent']);
+        unset($transformation['field_inline_navigation_pages']);
+      }
+    } elseif ($transformation['bundle'] == 'cinemas') {
+      /** @var \Drupal\kino_showtimes\Showtimes $showtimes */
+      $showtimes = Drupal::service('showtimes');
+      $transformation['cinemas'] = EntityTransform::createFromMultipleEntities($showtimes->getAllCinemaNodes(), 'teaser');
+      /** @var EntitySubqueue $queue */
+      $queue = EntitySubqueue::load('cinemas');
+      $transformation['##cache']['tags'] = $queue->getCacheTagsToInvalidate();
+    }
+  }
+
+  /* Node alterations */
+  elseif ($transformation['entity_type'] === 'node') {
+    /** @var \Drupal\node\Entity\Node $node */
+    $node = $entity;
+    if (isset($transformation['transform_mode']) && $transformation['transform_mode'] === 'search_result') {
+      if (isset($transformation['field_poster'])) {
+        $transformation['field_list_media'] = $transformation['field_poster'];
+        unset($transformation['field_poster']);
+      }
+      if (isset($transformation['field_image'])) {
+        $transformation['field_list_media'] = $transformation['field_image'];
+        unset($transformation['field_image']);
+      }
+    }
+    if (isset($transformation['transform_mode']) && in_array($transformation['transform_mode'], [
+        'teaser',
+        'search_result',
+        'inline_navigation'
+      ])) {
+      $transformation['url'] = $entity->toUrl()->toString();
+    }
+    /* Article nodes alterations */
+    if ($transformation['bundle'] == 'article') {
+      if (empty($transformation['url']) && !in_array($transformation['transform_mode'], [
+          'default',
+          'full'
+        ])) {
+        $transformation['url'] = $entity->toUrl()->toString();
+      }
+
+      $owner = $node->getOwner();
+      $transformation['owner'] = [
+        'name' => $owner->field_name->value,
+        'url' => $owner->toUrl()->toString(),
+      ];
+    }
+    /* Person nodes alterations */
+    elseif ($transformation['bundle'] == 'person') {
+      /** @var \Drupal\kino_content\PersonCreditsCollector $personCreditsCollector */
+      $personCreditsCollector = \Drupal::service('Drupal\kino_content\PersonCreditsCollector');
+      $transformation['field_credits'] = $personCreditsCollector->collectCredits($node);
+    }
+    /* Movie and Series nodes alterations */
+    elseif (in_array($transformation['bundle'], ['movie', 'series']) && ($transformation['transform_mode'] ?? '') == 'full') {
+      $feedback_type = 'anticipation';
+      if ($node->get('field_premiere')->isEmpty()) {
+        $feedback_type = 'review';
+      }
+      elseif (strtotime($node->get('field_premiere')
+          ->first()
+          ->getString()) < time()) {
+        $feedback_type = 'review';
+      }
+      $transformation['feedback_type'] = $feedback_type;
+      $transformation['#cache']['contexts'][] = 'user';
+      if (\Drupal::currentUser()->isAuthenticated()) {
+        $user = User::load(\Drupal::currentUser()->id());
+        $feedback = Feedback::loadByTargetUserAndType($node, $user, $feedback_type);
+        if (!empty($feedback)) {
+          $transformation['feedback'] = EntityTransform::createFromEntity($feedback);
+        }
+        else {
+          $transformation['feedback'] = NULL;
+        }
+      }
+      else {
+        $transformation['feedback'] = NULL;
+      }
+    }
+    if (in_array($transformation['bundle'], ['movie', 'event'])) {
+      /** @var \Drupal\kino_showtimes\Showtimes $showtimes */
+      $showtimes = Drupal::service('showtimes');
+      $transformation['movie_id'] = $showtimes->getMovieId($entity->id());
+      if ($transformation['movie_id'] === FALSE) {
+        $transformation['movie_id'] = NULL;
+      }
+    }
+  }
+
+  /* Media alterations */
+  elseif ($transformation['entity_type'] === 'media') {
+    if ($transformation['bundle'] == 'remote_video') {
+      $transformation['field_require_cookie_consent'] = TRUE;
+    }
+  }
+
+  /* Paragraph alterations */
+  elseif ($transformation['entity_type'] === 'paragraph') {
+  }
+
+  /* Feedback alterations */
+  elseif ($transformation['entity_type'] === 'feedback') {
+    /** @var Feedback $feedback */
+    $feedback = $entity;
+    /** @var \Drupal\Core\Datetime\DateFormatterInterface $dateformatter */
+    $dateformatter = \Drupal::service('date.formatter');
+    $transformation['date'] = $dateformatter->format($feedback->getCreatedTime(), 'date_only');
+    $transformation['displayName'] = new DisplayNameTransform($feedback->getOwnerId());
+    $transformation['published'] = $feedback->isPublished();
+    $transformation['permission_to_edit'] = $feedback->access('update');
+    $transformation['permission_to_delete'] = $feedback->access('delete');
+    $transformation['#cache']['contexts'][] = 'user';
+  }
+
+  /* User alterations */
+  elseif ($transformation['entity_type'] === 'user') {
+    /** @var \Drupal\user\Entity\User $user */
+    $user = $entity;
+    $transformation['email'] = $user->getEmail();
+  }
+}
+
+/**
+ * Implements hook_HOOK_transform_alter().
+ */
+function kino_content_field_transform_alter(&$transformation) {
+  if (in_array($transformation['#field_name'] ?? '', ['field_media_ratings_count', 'field_kino_rating_count', 'field_anticipation_count'])) {
+    for($x = 0; $x < 7; $x++) {
+      if (!isset($transformation[$x])) {
+        $transformation[$x] = 0;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_HOOK_transform_alter().
+ */
+function kino_content_section_transform_alter(&$transformation) {
+  $layout_id = $transformation['layout_id'];
+  foreach ($transformation['regions'] as $region => $components) {
+    switch ($layout_id) {
+      case 'layout_onecol':
+        if (isset($transformation['layout_settings']['column_width']) && $transformation['layout_settings']['column_width'] == 'section--width-full') {
+          $transform_mode = 'full_width';
+        } elseif (isset($transformation['layout_settings']['column_width']) && $transformation['layout_settings']['column_width'] == 'section--width-narrow') {
+          $transform_mode = 'width_66';
+        } else {
+          $transform_mode = 'width_100';
+        }
+        break;
+      case 'layout_twocol_section':
+        if (isset($transformation['layout_settings']['column_widths']) && $transformation['layout_settings']['column_widths'] == '67-33') {
+          if ($region == 'first') {
+            $transform_mode = 'width_66';
+          } else {
+            $transform_mode = 'width_33';
+          }
+        } elseif (isset($transformation['layout_settings']['column_widths']) && $transformation['layout_settings']['column_widths'] == '33-67') {
+          if ($region == 'first') {
+            $transform_mode = 'width_33';
+          } else {
+            $transform_mode = 'width_66';
+          }
+        } else {
+          $transform_mode = 'width_50';
+        }
+        break;
+      case 'layout_threecol_section':
+        $transform_mode = 'width_33';
+        break;
+      default:
+        $transform_mode = 'default';
+        break;
+    }
+    foreach ($components as $index => $component) {
+      if ($component instanceof \Drupal\transform_api\Transform\EntityTransform) {
+        $component->setValue('transform_mode', $transform_mode);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function kino_content_node_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+  /** @var Node $entity */
+  _kino_content_recalculate_media_ratings($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function kino_content_feedback_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+  /** @var FeedbackInterface $feedback */
+  $feedback = $entity;
+  if ($feedback->bundle() == 'review') {
+    if ($feedback->get('field_body')->isEmpty() || $feedback->get('field_body')
+        ->first()
+        ->getString() == '') {
+      $feedback->set('field_full_review', FALSE);
+    }
+    else {
+      $feedback->set('field_full_review', TRUE);
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function kino_content_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node') {
+    /** @var Node $entity */
+    _kino_content_invalidate_cast_members($entity);
+  } elseif ($entity->getEntityTypeId() == 'feedback' && in_array($entity->bundle(), ['review', 'anticipation'])) {
+    /** @var FeedbackInterface $entity */
+    _kino_content_recalculate_ratings($entity);
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function kino_content_entity_update(\Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node') {
+    /** @var Node $entity */
+    _kino_content_invalidate_cast_members($entity);
+  } elseif ($entity->getEntityTypeId() == 'feedback' && in_array($entity->bundle(), ['review', 'anticipation'])) {
+    /** @var FeedbackInterface $entity */
+    _kino_content_recalculate_ratings($entity);
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function kino_content_entity_delete(\Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node') {
+    /** @var Node $entity */
+    _kino_content_invalidate_cast_members($entity);
+  } elseif ($entity->getEntityTypeId() == 'feedback' && in_array($entity->bundle(), ['review', 'anticipation'])) {
+    /** @var FeedbackInterface $entity */
+    _kino_content_recalculate_ratings($entity);
+  }
+}
+
+function _kino_content_invalidate_cast_members(\Drupal\Core\Entity\EntityInterface $entity) {
+  /** @var Node $node */
+  $node = $entity;
+  if ($node->bundle() == 'movie') {
+    $tags = [];
+    /** @var \Drupal\entity_reference_revisions\EntityReferenceRevisionsFieldItemList $paragraphs */
+    $paragraphs = $node->get('field_cast_members');
+    /** @var \Drupal\taxonomy\Entity\Term $term */
+    foreach ($paragraphs->referencedEntities() as $paragraph) {
+      /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $person_list */
+      $person_list = $paragraph->get('field_person');
+      foreach ($person_list->referencedEntities() as $person) {
+        foreach ($person->getCacheTagsToInvalidate() as $tag) {
+          $tags[$tag] = $tag;
+        }
+      }
+    }
+    \Drupal\Core\Cache\Cache::invalidateTags(array_values($tags));
+  }
+}
+
+/**
+ * Implements hook_entity_overview_count_options_alter().
+ */
+function kino_content_entity_overview_count_options_alter(&$options, &$overview_id) {
+  $options = range(0, 20);
+  unset($options[0]);
+}
+
+/**
+ * Implements hook_HOOK_transform_alter().
+ */
+function kino_content_block_content_transform_alter(&$transformation) {
+  if ($transformation['bundle'] == 'movies') {
+    /** @var BlockContent $block */
+    $block = $transformation['#entity'];
+    $cacheableMetadata = CacheableMetadata::createFromRenderArray($transformation);
+    $movies = _kino_content_get_movies($block, $cacheableMetadata);
+    if ($block->get('field_ratings_type')->isEmpty()) {
+      $ratings_type = '';
+    } else {
+      $ratings_type = $block->get('field_ratings_type')->first()->getString();
+    }
+    if ($block->get('field_date_type')->isEmpty()) {
+      $date_type = '';
+    } else {
+      $date_type = $block->get('field_date_type')->first()->getString();
+    }
+    /** @var \Drupal\Core\Datetime\DateFormatterInterface $dateformatter */
+    $dateformatter = \Drupal::service('date.formatter');
+    /** @var \Drupal\transform_api\Transformer $transformer */
+    $transformer = \Drupal::service('transform_api.transformer');
+    $transformation['movies'] = [];
+    /** @var Node $movie */
+    foreach ($movies as $movie) {
+      if ($movie->bundle() !== 'movie') {
+        continue;
+      }
+      $entityTransform = \Drupal\transform_api\Transform\EntityTransform::createFromEntity($movie, 'teaser');
+      /** @var array $movie_transform */
+      $movie_transform = $transformer->transform($entityTransform) ?: [];
+      switch ($ratings_type) {
+        case 'anticipated':
+          if ($movie->get('field_anticipation_score')->isEmpty()) {
+            $movie_transform['rating'] = NULL;
+          } else {
+            $movie_transform['rating'] = floatval($movie->get('field_anticipation_score')
+              ->first()
+              ->getString());
+          }
+          break;
+        case 'user':
+          if ($movie->get('field_kino_rating_score')->isEmpty()) {
+            $movie_transform['rating'] = NULL;
+          } else {
+            $movie_transform['rating'] = floatval($movie->get('field_kino_rating_score')
+              ->first()
+              ->getString());
+          }
+          break;
+        case 'media':
+          if ($movie->get('field_media_ratings_score')->isEmpty()) {
+            $movie_transform['rating'] = NULL;
+          } else {
+            $movie_transform['rating'] = floatval($movie->get('field_media_ratings_score')
+              ->first()
+              ->getString());
+          }
+          break;
+        default:
+          $movie_transform['rating'] = NULL;
+          break;
+      }
+      switch ($date_type) {
+        case 'presale':
+          if ($movie->get('field_presale_start')->isEmpty()) {
+            $movie_transform['date'] = NULL;
+          } else {
+            $movie_transform['date'] = $dateformatter->format(strtotime($movie->get('field_presale_start')
+              ->first()->getValue()['value']), 'date_only');
+          }
+          break;
+        case 'premiere':
+          if ($movie->get('field_premiere')->isEmpty()) {
+            $movie_transform['date'] = NULL;
+          } else {
+            $movie_transform['date'] = $dateformatter->format(strtotime($movie->get('field_premiere')
+              ->first()->getValue()['value']), 'date_only');
+          }
+          break;
+        case 'streaming':
+          if ($movie->get('field_streaming_premiere')->isEmpty()) {
+            $movie_transform['date'] = NULL;
+          } else {
+            $movie_transform['date'] = $dateformatter->format(strtotime($movie->get('field_streaming_premiere')
+              ->first()->getValue()['value']), 'date_only');
+          }
+          break;
+        default:
+          $movie_transform['date'] = NULL;
+          break;
+      }
+      $transformation['movies'][] = $movie_transform;
+    }
+    $cacheableMetadata->applyTo($transformation);
+  }
+  if ($transformation['bundle'] == 'articles') {
+    /** @var BlockContent $block */
+    $block = $transformation['#entity'];
+    $cacheableMetadata = CacheableMetadata::createFromRenderArray($transformation);
+    $articles = _kino_content_get_articles($block, $cacheableMetadata);
+    $transformation['articles'] = \Drupal\transform_api\Transform\EntityTransform::createFromMultipleEntities($articles, 'teaser');
+    $cacheableMetadata->applyTo($transformation);
+  }
+}
+
+function _kino_content_get_articles(BlockContent $block, CacheableMetadata $cacheableMetadata) {
+  /** @var Drupal\Core\Field\EntityReferenceFieldItemList $selected */
+  $selected = $block->get('field_selected_articles');
+  $articles = $selected->referencedEntities();
+
+  if (empty($articles)) {
+    /** @var Drupal\Core\Field\EntityReferenceFieldItemList $queue_field */
+    $queue_field = $block->get('field_article_queue');
+    /** @var \Drupal\entityqueue\Entity\EntitySubqueue $queue */
+    $queue = $queue_field->referencedEntities()[0] ?? NULL;
+    if (is_object($queue)) {
+      $cacheableMetadata->addCacheableDependency($queue);
+      $articles = $queue->get('items')->referencedEntities();
+      $start = max(intval($block->get('field_queue_start')->first()->getString()), 1) - 1;
+      $length = max(intval($block->get('field_queue_length')->first()->getString()), 1);
+      $articles = array_slice($articles, $start, $length);
+    }
+  }
+
+  if (empty($articles)) {
+    $items = $block->get('field_articles');
+    $overview_id = $items->getSetting('overview');
+    foreach ($items as $delta => $item) {
+      $filter = new OverviewFilter($overview_id, $item->getValue());
+      $result = $filter->getOverview()->getOverviewResult($filter);
+      $articles = $result->getEntities();
+    }
+  }
+
+  foreach ($articles as $movie) {
+    $cacheableMetadata->addCacheableDependency($movie);
+  }
+
+  return $articles;
+}
+
+function _kino_content_get_movies(BlockContent $block, CacheableMetadata $cacheableMetadata) {
+  /** @var Drupal\Core\Field\EntityReferenceFieldItemList $selected */
+  $selected = $block->get('field_selected_movies');
+  $movies = $selected->referencedEntities();
+
+  if (empty($movies)) {
+    /** @var Drupal\Core\Field\EntityReferenceFieldItemList $queue_field */
+    $queue_field = $block->get('field_movie_queue');
+    /** @var \Drupal\entityqueue\Entity\EntitySubqueue $queue */
+    $queue = $queue_field->referencedEntities()[0] ?? NULL;
+    if (is_object($queue)) {
+      $cacheableMetadata->addCacheableDependency($queue);
+      $movies = $queue->get('items')->referencedEntities();
+      $start = max(intval($block->get('field_queue_start')->first()->getString()), 1) - 1;
+      $length = max(intval($block->get('field_queue_length')->first()->getString()), 1);
+      $movies = array_slice($movies, $start, $length);
+    }
+  }
+
+  if (empty($movies)) {
+    $items = $block->get('field_movies_filter');
+    $overview_id = $items->getSetting('overview');
+    foreach ($items as $delta => $item) {
+      $filter = new OverviewFilter($overview_id, $item->getValue());
+      $result = $filter->getOverview()->getOverviewResult($filter);
+      $movies = $result->getEntities();
+    }
+  }
+
+  foreach ($movies as $movie) {
+    $cacheableMetadata->addCacheableDependency($movie);
+  }
+
+  return $movies;
+}
+
+function _kino_content_recalculate_media_ratings(NodeInterface $node) {
+  if (is_null($node) || !in_array($node->bundle(), ['movie', 'series'])) {
+    return;
+  }
+
+  $media_ratings_count = [0, 0, 0, 0, 0, 0, 0];
+  $media_ratings_total = 0;
+  /** @var \Drupal\entity_reference_revisions\EntityReferenceRevisionsFieldItemList $paragraphs */
+  $paragraphs = $node->get('field_media_ratings');
+  /** @var \Drupal\taxonomy\Entity\Term $term */
+  foreach ($paragraphs->referencedEntities() as $paragraph) {
+    if (!$paragraph->get('field_rating')->isEmpty() && $paragraph->get('field_rating')->first()->getString() > 0) {
+      $media_ratings_count[0]++;
+      $rating = intval($paragraph->get('field_rating')->first()->getString());
+      $media_ratings_count[$rating]++;
+      $media_ratings_total += $rating;
+    }
+  }
+
+  $node->set('field_media_ratings_count', $media_ratings_count);
+  if ($media_ratings_count[0] > 0) {
+    $node->set('field_media_ratings_score', floatval($media_ratings_total) / $media_ratings_count[0]);
+  } else {
+    $node->set('field_media_ratings_score', 0);
+  }
+}
+
+function _kino_content_recalculate_ratings(FeedbackInterface $feedback) {
+  /** @var Node $node */
+  $node = $feedback->getTarget();
+  if (is_null($node) || !in_array($node->bundle(), ['movie', 'series'])) {
+    return;
+  }
+
+  $feedbacks = Feedback::loadAllWithTarget($node);
+  $anticipation_count = [0, 0, 0, 0, 0, 0, 0];
+  $anticipation_total = 0;
+  $kino_rating_count = [0, 0, 0, 0, 0, 0, 0];
+  $kino_rating_total = 0;
+  foreach ($feedbacks as $feedback) {
+    if (!$feedback->isPublished()) {
+      continue;
+    }
+    if ($feedback->bundle() == 'anticipation') {
+      if (!$feedback->get('field_rating')->isEmpty() && $feedback->get('field_rating')->first()->getString() > 0) {
+        $anticipation_count[0]++;
+        $rating = intval($feedback->get('field_rating')->first()->getString());
+        $anticipation_count[$rating]++;
+        $anticipation_total += $rating;
+      }
+    } elseif (in_array($feedback->bundle(), ['rating', 'review'])) {
+      if (!$feedback->get('field_rating')->isEmpty() && $feedback->get('field_rating')->first()->getString() > 0) {
+        $kino_rating_count[0]++;
+        $rating = intval($feedback->get('field_rating')->first()->getString());
+        $kino_rating_count[$rating]++;
+        $kino_rating_total += $rating;
+      }
+    }
+  }
+
+  $node->set('field_kino_rating_count', $kino_rating_count);
+  if ($kino_rating_count[0] > 0) {
+    $node->set('field_kino_rating_score', floatval($kino_rating_total) / $kino_rating_count[0]);
+  } else {
+    $node->set('field_kino_rating_score', 0);
+  }
+  $node->set('field_anticipation_count', $anticipation_count);
+  if ($anticipation_count[0] > 0) {
+    $node->set('field_anticipation_score', floatval($anticipation_total) / $anticipation_count[0]);
+  } else {
+    $node->set('field_anticipation_score', 0);
+  }
+  $node->save();
+}

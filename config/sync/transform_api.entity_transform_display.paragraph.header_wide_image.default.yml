@@ -1,0 +1,37 @@
+uuid: 6e3cf755-2b00-4974-b6d5-53ea931e822f
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.header_wide_image.field_content
+    - field.field.paragraph.header_wide_image.field_heading
+    - field.field.paragraph.header_wide_image.field_image
+    - paragraphs.paragraphs_type.header_wide_image
+id: paragraph.header_wide_image.default
+targetEntityType: paragraph
+bundle: header_wide_image
+mode: default
+content:
+  field_content:
+    type: text_format
+    weight: '1'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+  field_heading:
+    type: value
+    weight: '0'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+  field_image:
+    type: entity_transform
+    weight: '2'
+    region: content
+    label: omit
+    settings:
+      transform_mode: default
+    third_party_settings: {  }
+hidden: {  }

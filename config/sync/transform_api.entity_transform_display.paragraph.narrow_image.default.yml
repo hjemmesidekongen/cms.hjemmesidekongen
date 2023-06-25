@@ -1,0 +1,29 @@
+uuid: 691d9633-47ac-442b-8648-85a29092d917
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.narrow_image.field_description
+    - field.field.paragraph.narrow_image.field_image
+    - paragraphs.paragraphs_type.narrow_image
+id: paragraph.narrow_image.default
+targetEntityType: paragraph
+bundle: narrow_image
+mode: default
+content:
+  field_description:
+    type: value
+    weight: '1'
+    region: content
+    label: omit
+    settings: {  }
+    third_party_settings: {  }
+  field_image:
+    type: entity_transform
+    weight: '0'
+    region: content
+    label: omit
+    settings:
+      transform_mode: default
+    third_party_settings: {  }
+hidden: {  }

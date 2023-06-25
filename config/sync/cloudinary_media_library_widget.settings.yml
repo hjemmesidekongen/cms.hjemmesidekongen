@@ -1,0 +1,7 @@
+_core:
+  default_config_hash: s93czP3G94ikiKuBZUeeMb2mVk_jv8FL18aTQpDBYKk
+langcode: da
+cloudinary_saml_auth: '0'
+cloudinary_starting_folder: /
+cloudinary_image_optimizations: f_auto/q_auto
+cloudinary_responsive_breakpoints: {  }

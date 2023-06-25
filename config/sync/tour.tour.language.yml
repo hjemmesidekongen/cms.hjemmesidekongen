@@ -1,0 +1,55 @@
+uuid: 5f51f07c-11bc-4d3d-b57d-651a76b6c0c2
+langcode: da
+status: true
+dependencies:
+  module:
+    - language
+_core:
+  default_config_hash: Okz8QMYRGvq95nqLGYjp8gLiy93DKoMEzEVZVwEeg4M
+id: language
+label: Sprog
+module: language
+routes:
+  -
+    route_name: entity.configurable_language.collection
+tips:
+  language-overview:
+    id: language-overview
+    plugin: text
+    label: Sprog
+    weight: 1
+    body: '<p>På siden "sprog" kan du tilføje, redigere, slette og sortere sitets sprog.</p>'
+  language-add:
+    id: language-add
+    plugin: text
+    label: 'Tilføjelse af sprog'
+    weight: 2
+    selector: .button-action
+    body: '<p>For at tilføje flere sprog til sitet skal du klikke på knappen "Tilføj sprog".</p><p>Tilføjede sprog vises på sproglisten og kan derefter redigeres eller slettes.</p>'
+  language-reorder:
+    id: language-reorder
+    plugin: text
+    label: 'Omorganisering af sprog'
+    weight: 3
+    selector: .draggable
+    body: '<p>Hvis du vil omarrangere sprogene på webstedet, skal du bruge ikonerne ud for hvert sprog.</p><p>Den rækkefølge, der vises her, er visningsrækkefølgen for sproglister på webstedet, f.eks. de blokke til sprogskift, som Translation- og Content Translation-modulerne tilbyder.</p><p>Når du er færdig med at omarrangere sprogene, skal du klikke på knappen "Gem konfiguration", for at ændringerne kan træde i kraft.</p>'
+  language-default:
+    id: language-default
+    plugin: text
+    label: 'Vælg standardsprog'
+    weight: 4
+    selector: .js-form-item-site-default-language
+    body: '<p>Du kan ændre standardsproget for webstedet ved at vælge et af dine konfigurerede sprog som standard. Webstedet vil bruge standardsproget i situationer, hvor ingen valg er truffet, men et sprog bør vælges som standard brug, da dette bland andet bliver brugt i administrations delen.</p>'
+  language-operations:
+    id: language-operations
+    plugin: text
+    label: 'Tilpasning af sprog'
+    weight: 5
+    selector: .dropbutton-wrapper
+    body: '<p>Operationer er tilgængelige til redigering og sletning af dine sprog.</p><p>Du kan redigere navnet og retning af sproget.</p><p>Slettede sprog kan tilføjes igen på et senere tidspunkt. Sletning af et sprog vil fjerne alle interface oversættelser forbundet med det, og indhold i dette sprog angives at være sprogneutral. Bemærk at du ikke kan slette standardsproget for webstedet.</p>'
+  language-continue:
+    id: language-continue
+    plugin: text
+    label: 'Fortsætter på'
+    weight: 6
+    body: '<p>Nu hvor du har et overblik på siden "Sprog", kan du fortsætte ved at:<ul><li><a href="[site:url]admin/config/regional/language/add">Tilføje et sprog</a></li><li>Ændre rækkefølge af sprog</li><li>Redigere et sprog</li><li>Slette et sprog</li></ul></p>'

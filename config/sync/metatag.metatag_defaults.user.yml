@@ -1,0 +1,12 @@
+uuid: eb9f15c5-27dc-4257-973a-5eeb41f142b7
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: MvQPTbQx0Vxwy0ordSHyixdZmLCMpvMdLD69dlwkrKc
+id: user
+label: Bruger
+tags:
+  canonical_url: '[user:url]'
+  description: '[site:name]'
+  title: '[user:display-name] | [site:name]'
